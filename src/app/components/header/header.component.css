@@ -1,0 +1,23 @@
+li a i {
+  color: #f1b601; /* Couleur de l'icône */
+  margin-right: 5px; /* Espacement entre l'icône et le texte */
+  font-size: 16px; /* Taille de l'icône */
+}
+
+li a {
+  color: #2c3e50; /* Couleur du lien */
+  text-decoration: none; /* Supprimer le soulignement */
+}
+
+li a:hover {
+  color: #f1b501a1; /* Couleur au survol */
+}
+
+li {
+  list-style: none; /* Supprimer les puces des listes */
+}
+.nav a {
+  cursor: pointer; /* Change le curseur en "main" */
+  text-decoration: none; /* Facultatif : enlève le soulignement */
+  /* Facultatif : garde la couleur du texte par défaut */
+}

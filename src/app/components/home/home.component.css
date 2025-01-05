@@ -1,0 +1,20 @@
+.text-block {
+  text-align: right; /* Aligner le texte à droite */
+}
+
+.text-block h1,
+.text-block p,
+.text-block h2 {
+  text-align: right; /* S'assurer que tous les éléments texte sont alignés à droite */
+}
+
+.img-block {
+  display: flex; /* Activer le flexbox pour faciliter le positionnement */
+  justify-content: flex-end; /* Placer l'image à l'extrémité droite */
+  align-items: center; /* Centrer verticalement l'image (optionnel) */
+}
+
+.img-block img {
+  max-width: 100%; /* Rendre l'image responsive */
+  height: auto; /* Maintenir le ratio d'aspect de l'image */
+}
