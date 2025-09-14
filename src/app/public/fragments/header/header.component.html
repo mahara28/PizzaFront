@@ -52,9 +52,10 @@
 									</li>
 									<li><a href="#">Location</a></li>
 									<li><a href="contact.html">Contact Us</a></li> -->
-									<li><a [routerLink]="'/'">Login/Signup</a></li>
+									<li><a (click)="openLoginPopup()">Login/Signup</a></li>
 								</ul>
 							</nav>
+							<app-connexion *ngIf="showLoginPopup" (close)="closeLoginPopup()"></app-connexion>
 							<div class="nav-right-block">
 								<ul class="list-unstyled">
 									<li><a href="#"><i class="flaticon-scooter-front-view"></i><span class="nav-price">$00.00</span></a></li>
@@ -65,3 +66,4 @@
 				</div>
 			</div>
 		</header> <!-- header -->
+		

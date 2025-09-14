@@ -17,6 +17,8 @@ import { IndexComponent } from './public/index/index.component';
 import { MagasinsComponent } from './public/magasins/magasins.component';
 import { MenuComponent } from './public/menu/menu.component';
 import { PromoComponent } from './public/promo/promo.component';
+import { ConnexionComponent } from './public/index/connexion/connexion.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -36,11 +38,12 @@ import { PromoComponent } from './public/promo/promo.component';
     AdminComponent,
     SidebarComponent,
     TopbarComponent,
-
+    ConnexionComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

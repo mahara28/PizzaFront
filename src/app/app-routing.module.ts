@@ -8,6 +8,7 @@ import { IndexComponent } from './public/index/index.component';
 import { MagasinsComponent } from './public/magasins/magasins.component';
 import { MenuComponent } from './public/menu/menu.component';
 import { PromoComponent } from './public/promo/promo.component';
+import { LoginComponent } from './admin/login/login.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' }, // Redirection par défaut
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'engagements', component: EngagementsComponent },
   { path: 'avis', component: AvisClientsComponent },
   { path: 'cart', component: CartComponent },
+  { path: 'admin/login', component: LoginComponent },
 
 
 ];
