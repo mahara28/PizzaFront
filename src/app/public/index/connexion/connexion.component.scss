@@ -179,3 +179,67 @@
     font-size: 1.5rem;
   }
 }
+
+.social-login {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.social-providers {
+  display: flex;
+  gap: 12px;
+}
+
+.social-btn {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  border: none;
+  transition: transform 0.2s ease;
+}
+
+.social-btn:hover {
+  transform: scale(1.1);
+}
+
+/* Spécifiques */
+.social-btn.email {
+  background-color: rgba(52, 120, 246, 0.2);
+}
+
+.social-btn.apple {
+  background-color: #000;
+}
+
+.social-btn.facebook {
+  background-color: #1778f2;
+}
+
+.social-btn.google {
+  background-color: #efefef;
+}
+
+ /* Séparateur */
+        .separator {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            margin: 1.5rem 0;
+            color: #777;
+        }
+
+        .separator::before,
+        .separator::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .separator span {
+            padding: 0 1rem;
+            font-size: 0.9rem;
+        }
