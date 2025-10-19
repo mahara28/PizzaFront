@@ -45,7 +45,7 @@
                 </button>
 
                 <!-- Facebook -->
-                <button class="social-btn facebook" aria-label="Connexion par Facebook">
+                <button class="social-btn facebook" aria-label="Connexion par Facebook" (click)="signInWithFacebook()">
                     <svg width="12px" height="25px" viewBox="0 0 12 25"
                         data-testid="universal-authentication.login.social.facebook.icon" fill="#ffffff">
                         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -61,18 +61,7 @@
                 </button>
 
                 <!-- Google -->
-                <button class="social-btn google" aria-label="Connexion par Google">
-                    <svg width="23" height="24" viewBox="0 0 23 24">
-                        <path fill="#FBBC05" d="M4.657,11.745c0-0.746,0.12-1.461,0.335-2.132L1.243,6.657C0.513,8.189,0.101,9.915,0.101,11.745
-             s0.411,3.553,1.141,5.084l3.746-2.961C4.775,13.199,4.657,12.487,4.657,11.745" />
-                        <path fill="#EA4335" d="M11.237,4.959c1.569,0,2.987,0.574,4.1,1.514l3.239-3.341C16.603,1.357,14.072,0.261,11.237,0.261
-             C6.836,0.261,3.054,2.86,1.243,6.657l3.747,2.955C5.854,6.906,8.316,4.959,11.237,4.959" />
-                        <path fill="#34A853" d="M11.237,18.53c-2.921,0-5.383-1.947-6.246-4.654L1.243,16.831c1.811,3.798,5.593,6.397,9.994,6.397
-             c2.716,0,5.309-0.996,7.255-2.862l-3.557-2.84C13.931,18.179,12.668,18.53,11.237,18.53" />
-                        <path fill="#4285F4" d="M21.867,11.745c0-0.679-0.101-1.41-0.253-2.088h-10.376v4.437h5.973
-             c-0.299,1.513-1.112,2.676-2.275,3.433l3.557,2.84C20.537,18.407,21.867,15.488,21.867,11.745" />
-                    </svg>
-                </button>
+                <div id="googleSignInButton"></div>
             </div>
         </div>
         <!-- <div class="separator">

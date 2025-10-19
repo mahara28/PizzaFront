@@ -20,8 +20,7 @@ export class ProduitsService {
   } */
 
   
- getProduits(): Observable<Produit[]> {
-    
+  getProduits(): Observable<Produit[]> {
     return this.http.get<Produit[]>(environment.URL_CON + '/produit/allProduit')
   }
 }

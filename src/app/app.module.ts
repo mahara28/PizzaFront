@@ -17,8 +17,15 @@ import { IndexComponent } from './public/index/index.component';
 import { MagasinsComponent } from './public/magasins/magasins.component';
 import { MenuComponent } from './public/menu/menu.component';
 import { PromoComponent } from './public/promo/promo.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FacebookLoginProvider, GoogleLoginProvider, GoogleSigninButtonDirective, SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
 import { ConnexionComponent } from './public/index/connexion/connexion.component';
-import { FormsModule } from '@angular/forms';
+import { environment } from 'src/environments/environment';
+import { HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
+import { ListeCommande } from './public/client/commande/liste-commande/liste-commande';
+import { ProduitComponent } from './public/client/produit-component/produit-component';
+import { PanierComponent } from './public/client/panier-component/panier-component';
 
 @NgModule({
   declarations: [
@@ -26,7 +33,7 @@ import { FormsModule } from '@angular/forms';
     HeaderComponent,
     FooterComponent,
     IndexComponent,
-
+    ConnexionComponent,
     MenuComponent,
     MagasinsComponent,
     PromoComponent,
@@ -38,14 +45,63 @@ import { FormsModule } from '@angular/forms';
     AdminComponent,
     SidebarComponent,
     TopbarComponent,
-    ConnexionComponent
+    ListeCommande,
+    ProduitComponent,
+    PanierComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    CommonModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              environment.CLIENT_ID_GOOGLE  
+            )
+          }
+        ],
+        onError: (err) => {
+          console.error(err);
+        }
+      } as SocialAuthServiceConfig,
+    }
+  ],
+  
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+
+/*{
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false, // garde false pour ne pas reconnecter automatiquement
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              '895808675441-q8s1822o7cr7iopna7gohta6h9ge98ss.apps.googleusercontent.com'
+            )
+          },
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider(
+              'TON_APP_ID_FACEBOOK'
+            )
+          }
+        ],
+        onError: (err) => {
+          console.error(err);
+        }
+      } as SocialAuthServiceConfig,
+    }*/

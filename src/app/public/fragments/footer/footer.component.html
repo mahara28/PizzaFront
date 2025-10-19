@@ -1,4 +1,4 @@
-<footer class="main-footer new-block">
+<footer *ngIf="!jwtToken" class="main-footer new-block">
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
@@ -70,3 +70,53 @@
 				</div>
 			</div>
 		</footer>
+
+<footer *ngIf="jwtToken">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Domino's Pizza</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-info-circle"></i> À propos de nous</a></li>
+                        <li><a href="#"><i class="fas fa-award"></i> Nos engagements</a></li>
+                        <li><a href="#"><i class="fas fa-briefcase"></i> Recrutement</a></li>
+                        <li><a href="#"><i class="fas fa-store"></i> Franchise</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Informations</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-file-contract"></i> CGV</a></li>
+                        <li><a href="#"><i class="fas fa-shield-alt"></i> Politique de confidentialité</a></li>
+                        <li><a href="#"><i class="fas fa-gavel"></i> Mentions légales</a></li>
+                        <li><a href="#"><i class="fas fa-cookie-bite"></i> Cookies</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Aide</h3>
+                    <ul>
+                        <li><a href="#"><i class="far fa-question-circle"></i> FAQ</a></li>
+                        <li><a href="#"><i class="fas fa-envelope"></i> Contactez-nous</a></li>
+                        <li><a href="#"><i class="fas fa-truck"></i> Livraison</a></li>
+                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> Suivi de commande</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Suivez-nous</h3>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                &copy; 2023 Domino's Pizza. Tous droits réservés.
+            </div>
+        </div>
+    </footer>
