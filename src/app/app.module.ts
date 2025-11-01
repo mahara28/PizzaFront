@@ -1,28 +1,13 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
-
+import { AdminComponent } from './admin/admin/admin.component';
+import { SidebarComponent } from './admin/sidebar/sidebar.component';
+import { TopbarComponent } from './admin/topbar/topbar.component';
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './public/fragments/header/header.component';
-import { FooterComponent } from './public/fragments/footer/footer.component';
-import { IndexComponent } from './public/index/index.component';
-import { MenuComponent } from './public/menu/menu.component';
-import { MagasinsComponent } from './public/magasins/magasins.component';
-import { PromoComponent } from './public/promo/promo.component';
-import { FidelitesComponent } from './public/fidelites/fidelites.component';
-import { EngagementsComponent } from './public/engagements/engagements.component';
-import { CopyRightComponent } from './public/fragments/copy-right/copy-right.component';
 import { AvisClientsComponent } from './public/avis-clients/avis-clients.component';
 import { CartComponent } from './public/cart/cart.component';
-<<<<<<< HEAD
-import { LivraisonComponent } from './public/livraison/livraison.component';
-import { TopbarComponent } from './admin/topbar/topbar.component';
-import { SidebarComponent } from './admin/sidebar/sidebar.component';
-import { AdminComponent } from './admin/admin/admin.component';
-import { AppRoutingModule } from './app-routing.module';
-=======
 import { EngagementsComponent } from './public/engagements/engagements.component';
 import { FidelitesComponent } from './public/fidelites/fidelites.component';
 import { CopyRightComponent } from './public/fragments/copy-right/copy-right.component';
@@ -41,7 +26,7 @@ import { CommonModule } from '@angular/common';
 import { ListeCommande } from './public/client/commande/liste-commande/liste-commande';
 import { ProduitComponent } from './public/client/produit-component/produit-component';
 import { PanierComponent } from './public/client/panier-component/panier-component';
->>>>>>> 3f598a6027486652be28961a07f1beac58f92a95
+import { LivraisonComponent } from './public/livraison/livraison.component';
 
 @NgModule({
   declarations: [
@@ -49,10 +34,7 @@ import { PanierComponent } from './public/client/panier-component/panier-compone
     HeaderComponent,
     FooterComponent,
     IndexComponent,
-<<<<<<< HEAD
-=======
     ConnexionComponent,
->>>>>>> 3f598a6027486652be28961a07f1beac58f92a95
     MenuComponent,
     MagasinsComponent,
     PromoComponent,
@@ -64,26 +46,19 @@ import { PanierComponent } from './public/client/panier-component/panier-compone
     AdminComponent,
     SidebarComponent,
     TopbarComponent,
-<<<<<<< HEAD
-    LivraisonComponent,
-
-=======
     ListeCommande,
     ProduitComponent,
-    PanierComponent
->>>>>>> 3f598a6027486652be28961a07f1beac58f92a95
+    PanierComponent,
+    LivraisonComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-<<<<<<< HEAD
-    HttpClientModule,FormsModule
-=======
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
     CommonModule
->>>>>>> 3f598a6027486652be28961a07f1beac58f92a95
+  
   ],
   providers: [
     {

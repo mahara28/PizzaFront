@@ -1,4 +1,6 @@
+import { CommonModule } from '@angular/common';
 import { Component,ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 

@@ -19,7 +19,7 @@ const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' }, // Redirection par défaut
   { path: 'home', component: IndexComponent },
   { path: 'menu', component: MenuComponent },
-   { path: 'livraison', component: LivraisonComponent },
+  { path: 'livraison', component: LivraisonComponent },
 
   { path: 'magasins', component: MagasinsComponent },
   { path: 'promos', component: PromoComponent },
