@@ -14,6 +14,7 @@ import { PanierComponent } from './public/client/panier-component/panier-compone
 import { FidelitesComponent } from './public/fidelites/fidelites.component';
 import { EngagementsComponent } from './public/engagements/engagements.component';
 import { CartComponent } from './public/cart/cart.component';
+import { AdminComponent } from './admin/admin/admin.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' }, // Redirection par défaut
@@ -27,6 +28,7 @@ const routes: Routes = [
   { path: 'engagements', component: EngagementsComponent },
   { path: 'avis', component: AvisClientsComponent },
   { path: 'cart', component: CartComponent },
+  { path: 'administration', component: AdminComponent },
   { path: 'admin/login', component: LoginComponent },
   { path: 'auth/commande', component: ListeCommande },
   { path: 'auth/produit', component: ProduitComponent },
