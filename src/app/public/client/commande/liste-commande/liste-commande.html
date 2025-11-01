@@ -1,0 +1,272 @@
+    <!-- Header -->
+    <app-header></app-header>
+    
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <div class="page-title">
+                <h2><i class="fas fa-history"></i> Mes Commandes</h2>
+                <span>5 commandes au total</span>
+            </div>
+            
+            <div class="filters">
+                <button class="filter-btn active"><i class="fas fa-list"></i> Toutes</button>
+                <button class="filter-btn"><i class="fas fa-clock"></i> En cours</button>
+                <button class="filter-btn"><i class="fas fa-check-circle"></i> Livrées</button>
+                <button class="filter-btn"><i class="fas fa-times-circle"></i> Annulées</button>
+            </div>
+            
+            <div class="search-box">
+                <input type="text" placeholder="Rechercher une commande...">
+                <button class="search-btn"><i class="fas fa-search"></i></button>
+            </div>
+            
+            <div class="orders-section">
+                <!-- Order 1 -->
+                <div class="order-card">
+                    <div class="order-header">
+                        <div>
+                            <div class="order-id">Commande #DOM-2023-001</div>
+                            <div class="order-date"><i class="far fa-calendar"></i> Passée le 15 octobre 2023 à 18:30</div>
+                        </div>
+                        <div class="order-status status-delivered"><i class="fas fa-check"></i> Livrée</div>
+                    </div>
+                    
+                    <div class="order-details">
+                        <div class="order-items">
+                            <div class="order-item">
+                                <span class="item-name"><i class="fas fa-pizza-slice"></i> Pepperoni</span>
+                                <span class="item-quantity">x1</span>
+                                <span class="item-price">12,90€</span>
+                            </div>
+                            <div class="order-item">
+                                <span class="item-name"><i class="fas fa-pizza-slice"></i> 4 Fromages</span>
+                                <span class="item-quantity">x1</span>
+                                <span class="item-price">13,50€</span>
+                            </div>
+                            <div class="order-item">
+                                <span class="item-name"><i class="fas fa-wine-bottle"></i> Coca-Cola 1.5L</span>
+                                <span class="item-quantity">x1</span>
+                                <span class="item-price">3,50€</span>
+                            </div>
+                        </div>
+                        
+                        <div class="order-info">
+                            <div><i class="fas fa-truck"></i> <strong>Livraison:</strong> 19 rue de la Paix, Paris</div>
+                            <div><i class="far fa-credit-card"></i> <strong>Méthode de paiement:</strong> Carte bancaire</div>
+                            <div><i class="far fa-clock"></i> <strong>Heure de livraison:</strong> 19:15</div>
+                        </div>
+                        
+                        <div class="order-total">29,90€</div>
+                    </div>
+                    
+                    <div class="order-actions">
+                        <button class="action-btn"><i class="fas fa-redo"></i> Commander à nouveau</button>
+                        <button class="action-btn secondary"><i class="fas fa-file-invoice"></i> Voir la facture</button>
+                        <button class="action-btn secondary"><i class="fas fa-star"></i> Noter la commande</button>
+                    </div>
+                </div>
+                
+                <!-- Order 2 -->
+                <div class="order-card">
+                    <div class="order-header">
+                        <div>
+                            <div class="order-id">Commande #DOM-2023-002</div>
+                            <div class="order-date"><i class="far fa-calendar"></i> Passée le 12 octobre 2023 à 20:15</div>
+                        </div>
+                        <div class="order-status status-on-the-way"><i class="fas fa-motorcycle"></i> En route</div>
+                    </div>
+                    
+                    <div class="order-details">
+                        <div class="order-items">
+                            <div class="order-item">
+                                <span class="item-name"><i class="fas fa-pizza-slice"></i> Spéciale Maison</span>
+                                <span class="item-quantity">x1</span>
+                                <span class="item-price">14,90€</span>
+                            </div>
+                            <div class="order-item">
+                                <span class="item-name"><i class="fas fa-ice-cream"></i> Tiramisu</span>
+                                <span class="item-quantity">x2</span>
+                                <span class="item-price">5,00€</span>
+                            </div>
+                        </div>
+                        
+                        <div class="order-info">
+                            <div><i class="fas fa-truck"></i> <strong>Livraison:</strong> 45 avenue des Champs-Élysées, Paris</div>
+                            <div><i class="fab fa-paypal"></i> <strong>Méthode de paiement:</strong> PayPal</div>
+                            <div><i class="far fa-clock"></i> <strong>Estimation:</strong> 20-30 minutes</div>
+                        </div>
+                        
+                        <div class="order-total">24,90€</div>
+                    </div>
+                    
+                    <div class="order-actions">
+                        <button class="action-btn"><i class="fas fa-map-marker-alt"></i> Suivre ma commande</button>
+                        <button class="action-btn secondary"><i class="fas fa-headset"></i> Contacter le support</button>
+                    </div>
+                </div>
+                
+                <!-- Order 3 -->
+                <div class="order-card">
+                    <div class="order-header">
+                        <div>
+                            <div class="order-id">Commande #DOM-2023-003</div>
+                            <div class="order-date"><i class="far fa-calendar"></i> Passée le 8 octobre 2023 à 19:45</div>
+                        </div>
+                        <div class="order-status status-preparing"><i class="fas fa-utensils"></i> En préparation</div>
+                    </div>
+                    
+                    <div class="order-details">
+                        <div class="order-items">
+                            <div class="order-item">
+                                <span class="item-name"><i class="fas fa-pizza-slice"></i> Margherita</span>
+                                <span class="item-quantity">x2</span>
+                                <span class="item-price">10,90€</span>
+                            </div>
+                            <div class="order-item">
+                                <span class="item-name"><i class="fas fa-drumstick-bite"></i> Buffalo Wings</span>
+                                <span class="item-quantity">x1</span>
+                                <span class="item-price">8,50€</span>
+                            </div>
+                        </div>
+                        
+                        <div class="order-info">
+                            <div><i class="fas fa-store"></i> <strong>Retrait en magasin:</strong> Domino's Paris Centre</div>
+                            <div><i class="far fa-credit-card"></i> <strong>Méthode de paiement:</strong> Carte bancaire</div>
+                            <div><i class="far fa-clock"></i> <strong>Prêt dans:</strong> ~15 minutes</div>
+                        </div>
+                        
+                        <div class="order-total">30,30€</div>
+                    </div>
+                    
+                    <div class="order-actions">
+                        <button class="action-btn"><i class="fas fa-clock"></i> Voir le statut</button>
+                        <button class="action-btn secondary"><i class="fas fa-times"></i> Annuler la commande</button>
+                    </div>
+                </div>
+                
+                <!-- Order 4 -->
+                <div class="order-card">
+                    <div class="order-header">
+                        <div>
+                            <div class="order-id"> Commande #DOM-2023-004</div>
+                            <div class="order-date"><i class="far fa-calendar"></i> Passée le 5 octobre 2023 à 21:00</div>
+                        </div>
+                        <div class="order-status status-cancelled"><i class="fas fa-ban"></i> Annulée</div>
+                    </div>
+                    
+                    <div class="order-details">
+                        <div class="order-items">
+                            <div class="order-item">
+                                <span class="item-name"><i class="fas fa-pizza-slice"></i> Hawaïenne</span>
+                                <span class="item-quantity">x1</span>
+                                <span class="item-price">12,50€</span>
+                            </div>
+                            <div class="order-item">
+                                <span class="item-name"><i class="fas fa-wine-bottle"></i> Coca-Cola 1.5L</span>
+                                <span class="item-quantity">x1</span>
+                                <span class="item-price">3,50€</span>
+                            </div>
+                        </div>
+                        
+                        <div class="order-info">
+                            <div><i class="fas fa-truck"></i> <strong>Livraison:</strong> 12 rue du Commerce, Paris</div>
+                            <div><i class="far fa-credit-card"></i> <strong>Méthode de paiement:</strong> Carte bancaire</div>
+                            <div><i class="fas fa-exclamation-circle"></i> <strong>Raison:</strong> Annulée par le client</div>
+                        </div>
+                        
+                        <div class="order-total">16,00€</div>
+                    </div>
+                    
+                    <div class="order-actions">
+                        <button class="action-btn"><i class="fas fa-redo"></i> Commander à nouveau</button>
+                    </div>
+                </div>
+                
+                <!-- Order 5 -->
+                <div class="order-card">
+                    <div class="order-header">
+                        <div>
+                            <div class="order-id">Commande #CRM-2023-005</div>
+                            <div class="order-date"><i class="far fa-calendar"></i> Passée le 1 octobre 2023 à 17:20</div>
+                        </div>
+                        <div class="order-status status-delivered"><i class="fas fa-check"></i> Livrée</div>
+                    </div>
+                    
+                    <div class="order-details">
+                        <div class="order-items">
+                            <div class="order-item">
+                                <span class="item-name"><i class="fas fa-pizza-slice"></i> Végétarienne</span>
+                                <span class="item-quantity">x1</span>
+                                <span class="item-price">11,90€</span>
+                            </div>
+                            <div class="order-item">
+                                <span class="item-name"><i class="fas fa-leaf"></i> Salade César</span>
+                                <span class="item-quantity">x1</span>
+                                <span class="item-price">6,50€</span>
+                            </div>
+                        </div>
+                        
+                        <div class="order-info">
+                            <div><i class="fas fa-truck"></i> <strong>Livraison:</strong> 28 boulevard Saint-Germain, Paris</div>
+                            <div><i class="fas fa-money-bill-wave"></i> <strong>Méthode de paiement:</strong> Espèces</div>
+                            <div><i class="far fa-clock"></i> <strong>Heure de livraison:</strong> 18:05</div>
+                        </div>
+                        
+                        <div class="order-total">18,40€</div>
+                    </div>
+                    
+                    <div class="order-actions">
+                        <button class="action-btn"><i class="fas fa-redo"></i> Commander à nouveau</button>
+                        <button class="action-btn secondary"><i class="fas fa-file-invoice"></i> Voir la facture</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <app-footer></app-footer>
+
+    <script>
+        // Gestion des filtres
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Retirer la classe active de tous les boutons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Ajouter la classe active au bouton cliqué
+                    this.classList.add('active');
+                    
+                    // Dans une vraie application, on filtrerait les commandes ici
+                    console.log('Filtre activé:', this.textContent);
+                });
+            });
+            
+            // Gestion de la recherche
+            const searchInput = document.querySelector('.search-box input');
+            const searchButton = document.querySelector('.search-btn');
+            
+            searchButton.addEventListener('click', function() {
+                performSearch();
+            });
+            
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    performSearch();
+                }
+            });
+            
+            function performSearch() {
+                const searchTerm = searchInput.value.trim();
+                if (searchTerm) {
+                    console.log('Recherche:', searchTerm);
+                    // Dans une vraie application, on effectuerait la recherche ici
+                    alert(`Recherche de: "${searchTerm}"`);
+                }
+            }
+        });
+    </script>

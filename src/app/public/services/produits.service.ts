@@ -13,9 +13,22 @@ export class ProduitsService {
 constructor(private http: HttpClient) {}
 private apiUrl = 'http://localhost:8081/public';
 
+<<<<<<< HEAD
 // Récupérer tous les produits actifs
   getProduitsActifs(): Observable<Produit[]> {
     return this.http.get<Produit[]>(`${this.apiUrl}/ProduitActives`);
+=======
+ /*   getProduits(): Observable<Produit[]> {
+    return this.http.get<Produit[]>(this.apiUrl);
+
+    return this.http.get<ApiResponse<DemandeB3[]>>(environment.URL_CON + '/demande/liste', { headers });
+
+  } */
+
+  
+  getProduits(): Observable<Produit[]> {
+    return this.http.get<Produit[]>(environment.URL_CON + '/produit/allProduit')
+>>>>>>> 3f598a6027486652be28961a07f1beac58f92a95
   }
  // Recherche de produits avec filtres
   searchProduits(filters: {

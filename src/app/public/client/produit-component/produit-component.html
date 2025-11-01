@@ -1,0 +1,204 @@
+<!-- <div *ngIf="jwtToken">
+      <p>Token JWT Google:</p>
+      <textarea cols="60" rows="6">{{ jwtToken }}</textarea>
+    </div> -->
+
+    <!-- Header -->
+      <app-header></app-header>
+    
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <h2 class="page-title">Nos Pizzas</h2>
+            
+            <div class="products-section">
+                <!-- Filters -->
+                <aside class="filters">
+                    <div class="filter-group">
+                        <h3 class="filter-title">Catégories</h3>
+                        <div class="filter-options">
+                            <label class="filter-option">
+                                <input type="checkbox" checked> Pizzas
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox"> Boissons
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox"> Desserts
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox"> Accompagnements
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <h3 class="filter-title">Prix</h3>
+                        <input type="range" min="0" max="30" value="15" class="price-range">
+                        <div class="price-values">
+                            <span>0€</span>
+                            <span>30€</span>
+                        </div>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <h3 class="filter-title">Taille</h3>
+                        <div class="filter-options">
+                            <label class="filter-option">
+                                <input type="checkbox" checked> Petite
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" checked> Moyenne
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox"> Grande
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox"> Familiale
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <h3 class="filter-title">Ingrédients</h3>
+                        <div class="filter-options">
+                            <label class="filter-option">
+                                <input type="checkbox"> Végétarienne
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox"> Sans gluten
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox"> Épicée
+                            </label>
+                        </div>
+                    </div>
+                </aside>
+                
+                <!-- Products Grid -->
+                <div class="products-grid">
+                    <!-- Product 1 -->
+                    <div class="product-card">
+                        <div class="product-image">
+                            [Image Pizza 1]
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">Margherita</h3>
+                            <p class="product-description">Sauce tomate, mozzarella, basilic frais</p>
+                            <div class="product-price">10,90€</div>
+                            <button class="add-to-cart">Ajouter au panier</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Product 2 -->
+                    <div class="product-card">
+                        <div class="product-image">
+                            [Image Pizza 2]
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">Pepperoni</h3>
+                            <p class="product-description">Sauce tomate, mozzarella, pepperoni</p>
+                            <div class="product-price">12,90€</div>
+                            <button class="add-to-cart">Ajouter au panier</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Product 3 -->
+                    <div class="product-card">
+                        <div class="product-image">
+                            [Image Pizza 3]
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">4 Fromages</h3>
+                            <p class="product-description">Mozzarella, gorgonzola, parmesan, chèvre</p>
+                            <div class="product-price">13,50€</div>
+                            <button class="add-to-cart">Ajouter au panier</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Product 4 -->
+                    <div class="product-card">
+                        <div class="product-image">
+                            [Image Pizza 4]
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">Hawaïenne</h3>
+                            <p class="product-description">Sauce tomate, mozzarella, jambon, ananas</p>
+                            <div class="product-price">12,50€</div>
+                            <button class="add-to-cart">Ajouter au panier</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Product 5 -->
+                    <div class="product-card">
+                        <div class="product-image">
+                            [Image Pizza 5]
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">Végétarienne</h3>
+                            <p class="product-description">Sauce tomate, mozzarella, légumes grillés</p>
+                            <div class="product-price">11,90€</div>
+                            <button class="add-to-cart">Ajouter au panier</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Product 6 -->
+                    <div class="product-card">
+                        <div class="product-image">
+                            [Image Pizza 6]
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">Spéciale Maison</h3>
+                            <p class="product-description">Sauce tomate, mozzarella, viande hachée, champignons</p>
+                            <div class="product-price">14,90€</div>
+                            <button class="add-to-cart">Ajouter au panier</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <app-footer></app-footer>
+
+    <script>
+        // Gestion du panier
+        document.addEventListener('DOMContentLoaded', function() {
+            const addToCartButtons = document.querySelectorAll('.add-to-cart');
+            const cartCount = document.querySelector('.cart-count');
+            let count = parseInt(cartCount.textContent);
+            
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    count++;
+                    cartCount.textContent = count;
+                    
+                    // Animation du bouton
+                    this.textContent = 'Ajouté !';
+                    this.style.backgroundColor = '#28a745';
+                    
+                    setTimeout(() => {
+                        this.textContent = 'Ajouter au panier';
+                        this.style.backgroundColor = '';
+                    }, 1500);
+                });
+            });
+            
+            // Gestion des filtres
+            const priceRange = document.querySelector('.price-range');
+            const filterOptions = document.querySelectorAll('.filter-option input');
+            
+            priceRange.addEventListener('input', function() {
+                // Dans une vraie application, on filtrerait les produits ici
+                console.log('Prix max:', this.value);
+            });
+            
+            filterOptions.forEach(option => {
+                option.addEventListener('change', function() {
+                    // Dans une vraie application, on filtrerait les produits ici
+                    console.log('Filtre modifié:', this.parentElement.textContent.trim());
+                });
+            });
+        });
+    </script>

@@ -7,10 +7,13 @@ import { MenuComponent } from './public/menu/menu.component';
 import { LivraisonComponent } from './public/livraison/livraison.component';
 import { MagasinsComponent } from './public/magasins/magasins.component';
 import { PromoComponent } from './public/promo/promo.component';
+import { LoginComponent } from './admin/login/login.component';
+import { ListeCommande } from './public/client/commande/liste-commande/liste-commande';
+import { ProduitComponent } from './public/client/produit-component/produit-component';
+import { PanierComponent } from './public/client/panier-component/panier-component';
 import { FidelitesComponent } from './public/fidelites/fidelites.component';
 import { EngagementsComponent } from './public/engagements/engagements.component';
 import { CartComponent } from './public/cart/cart.component';
-import { AdminComponent } from './admin/admin/admin.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' }, // Redirection par défaut
@@ -24,7 +27,10 @@ const routes: Routes = [
   { path: 'engagements', component: EngagementsComponent },
   { path: 'avis', component: AvisClientsComponent },
   { path: 'cart', component: CartComponent },
-  { path: 'admin', component: AdminComponent },
+  { path: 'admin/login', component: LoginComponent },
+  { path: 'auth/commande', component: ListeCommande },
+  { path: 'auth/produit', component: ProduitComponent },
+  { path: 'auth/panier', component: PanierComponent },
 
 
 ];

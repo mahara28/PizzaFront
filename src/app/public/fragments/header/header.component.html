@@ -1,32 +1,33 @@
-<header class="new-block main-header">
-			<div class="main-nav new-block">
-				<div class="container-fluid">
-					<div class="row">
-						<div class="col-lg-12">
-							<div class="logo">
-								<a href="index.html"><img src="assets/public/images/logo-pizza.png" alt="logo" class="img-responsive"></a>
-							</div>
-							<div class="location-block">
-								<p>France</p>
-								<span>+00 33 22 456 789</span>
-							</div>
-							<a  class="nav-opener"><i class="fa fa-bars"></i></a>
-							<nav class="nav">
-								<ul class="list-unstyled">
-									<!-- <li class="drop active"><a [routerLink]="'/home'">Home</a>
+<header *ngIf="!jwtToken" class="new-block main-header">
+	<div class="main-nav new-block">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="logo">
+						<a href="index.html"><img src="assets/public/images/logo-pizza.png" alt="logo"
+								class="img-responsive"></a>
+					</div>
+					<div class="location-block">
+						<p>France</p>
+						<span>+00 33 22 456 789</span>
+					</div>
+					<a class="nav-opener"><i class="fa fa-bars"></i></a>
+					<nav class="nav">
+						<ul class="list-unstyled">
+							<!-- <li class="drop active"><a [routerLink]="'/home'">Home</a>
 									 	<ul class="drop-down">
 											<li><a href="index.html">Home1</a></li>
 											<li><a href="home2.html">Home2</a></li>
 										</ul>
 									</li> -->
-									<li class="drop"><a [routerLink]="'/menu'">Menu</a>
-										<!-- <ul class="drop-down">
+							<li class="drop"><a [routerLink]="'/menu'">Menu</a>
+								<!-- <ul class="drop-down">
 											<li><a href="menu.html">Menu</a></li>
 											<li><a href="menu2.html">Menu2</a></li>
 										</ul> -->
-									</li>
-									<li class="drop"><a [routerLink]="'/magasins'">Magasins</a>
-										<!-- <ul class="drop-down">
+							</li>
+							<li class="drop"><a [routerLink]="'/magasins'">Magasins</a>
+								<!-- <ul class="drop-down">
 											<li><a href="menu.html">Menu</a></li>
 											<li><a href="menu2.html">Menu2</a></li>
 											<li><a href="about_us.html">About</a></li>
@@ -38,11 +39,11 @@
 											<li><a href="product_single.html">Product single</a></li>
 											<li><a href="shopping_cart.html">Cart page</a></li>
 										</ul> -->
-									</li>
-									<li><a [routerLink]="'/promos'">Promos</a></li>
-									<li><a [routerLink]="'/fidelites'">Fidelites</a></li>
-									<li><a  [routerLink]="'/engagements'">Engagements</a></li>
-									<!-- <li class="drop"><a href="#">Blog</a>
+							</li>
+							<li><a [routerLink]="'/promos'">Promos</a></li>
+							<li><a [routerLink]="'/fidelites'">Fidelites</a></li>
+							<li><a [routerLink]="'/engagements'">Engagements</a></li>
+							<!-- <li class="drop"><a href="#">Blog</a>
 										<ul class="drop-down">
 											<li><a href="blog.html">Blog</a></li>
 											<li><a href="blog_left.html">Blog left</a></li>
@@ -52,16 +53,66 @@
 									</li>
 									<li><a href="#">Location</a></li>
 									<li><a href="contact.html">Contact Us</a></li> -->
-									<li><a [routerLink]="'/'">Login/Signup</a></li>
-								</ul>
-							</nav>
-							<div class="nav-right-block">
-								<ul class="list-unstyled">
-									<li><a href="#"><i class="flaticon-scooter-front-view"></i><span class="nav-price">$00.00</span></a></li>
-								</ul>
-							</div><!-- nav-login -->
-						</div>
-					</div>
+							<li><a (click)="openLoginPopup()">Login/Signup</a></li>
+						</ul>
+					</nav>
+					<app-connexion *ngIf="showLoginPopup" (close)="closeLoginPopup()"></app-connexion>
+					<div class="nav-right-block">
+						<ul class="list-unstyled">
+							<li><a href="#"><i class="flaticon-scooter-front-view"></i><span
+										class="nav-price">$00.00</span></a></li>
+						</ul>
+					</div><!-- nav-login -->
 				</div>
 			</div>
-		</header> <!-- header -->
+		</div>
+	</div>
+</header> <!-- header -->
+
+<header classe="header-auth" *ngIf="jwtToken">
+	<div class="container">
+		<div class="header-content">
+			<div class="logo">
+				<div
+					style="width: 40px; height: 40px; background-color: #0c0c0c; border-radius: 50%; display: flex; justify-content: center; align-items: center; color: #FFC72C; font-weight: bold;">
+					<i class="fas fa-pizza-slice"></i>
+				</div>
+				<h1>CROUSTI_MAX</h1>
+			</div>
+
+			<nav class="nav-auth">
+				<ul>
+					<li><a [routerLink]="'/auth/produit'"><i class="fas fa-pizza-slice"></i> Produits</a></li>
+					<!-- <li><a [routerLink]="'/auth/panier'"><i class="fas fa-shopping-cart"></i> Panier</a></li> -->
+					<li><a [routerLink]="'/auth/commande'"><i class="fas fa-history"></i> Commandes</a></li>
+					<!-- <li><a href="#"><i class="fas fa-user"></i> Mon Compte</a></li> -->
+				</ul>
+			</nav>
+
+			<div class="user-actions">
+				<div class="cart-icon">
+					<a [routerLink]="'/auth/panier'"><i class="fas fa-shopping-cart"></i></a>
+					<span class="cart-count">2</span>
+				</div>
+
+				<div class="user-profile" (click)="toggleDropdown()" tabindex="0">
+					<div class="user-avatar">
+						<img *ngIf="userInfo?.picture; else defaultIcon" [src]="userInfo.picture" alt="Photo de profil"
+							class="avatar-img" />
+						<ng-template #defaultIcon>
+							<i class="fas fa-user"></i>
+						</ng-template>
+					</div>
+					<span>{{ userInfo?.name }}</span>
+
+					<!-- Dropdown -->
+					<div class="dropdown-menu" *ngIf="dropdownOpen">
+						<a [routerLink]="'/auth/mon-compte'"><i class="fas fa-user"></i> Mon Compte</a>
+						<a (click)="logout()"><i class="fas fa-sign-out"></i> Déconnexion</a>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</header>
