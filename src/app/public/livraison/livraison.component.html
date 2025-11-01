@@ -1,0 +1,42 @@
+<div class="livraison-container">
+
+  <!-- Étape 1 : Recherche d'adresse -->
+  <div *ngIf="step === 1" class="step step1">
+    <div #mapContainer style="width: 100%; height: 800px;"></div>
+
+    <div class="card center">
+      <h3>Recherche d'adresse</h3>
+      <input type="text" class="form-control" [(ngModel)]="adresse" placeholder="Adresse sélectionnée" />
+      <button class="btn btn-primary mt-2" (click)="nextStep()" [disabled]="!adresse">Confirmer l'adresse</button>
+    </div>
+  </div>
+
+  <!-- Étape 2 : Confirmation -->
+  <div *ngIf="step === 2" class="step step2">
+    <div class="card">
+      <h3>Confirmer l'adresse</h3>
+      <p><b>Adresse :</b> {{adresse}}</p>
+      <input type="text" class="form-control" [(ngModel)]="rue" placeholder="Numéro de rue (optionnel)" />
+      <input type="text" class="form-control mt-2" [(ngModel)]="infos" placeholder="Informations supplémentaires" />
+      <input type="text" class="form-control mt-2" [(ngModel)]="batiment" placeholder="Numéro de bâtiment (optionnel)" />
+
+      <button class="btn btn-secondary mt-3" (click)="previousStep()">⬅ Retour</button>
+      <button class="btn btn-primary mt-3 ms-2" (click)="nextStep()">Choisir l'adresse</button>
+    </div>
+  </div>
+
+  <!-- Étape 3 : Informations magasin -->
+  <div *ngIf="step === 3" class="step step3">
+    <div class="card">
+      <h3>Informations magasin</h3>
+      <label>Date :</label>
+      <input type="date" class="form-control" [(ngModel)]="date" />
+      <label class="mt-2">Horaire :</label>
+      <input type="time" class="form-control" [(ngModel)]="horaire" />
+
+      <button class="btn btn-secondary mt-3" (click)="previousStep()">⬅ Retour</button>
+      <button class="btn btn-success mt-3 ms-2" (click)="finish()">Valider</button>
+    </div>
+  </div>
+
+</div>

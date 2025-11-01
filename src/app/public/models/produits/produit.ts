@@ -1,13 +1,14 @@
-export class Produit {
- 
-
-  idPrd!: number;
-  libePrd!: string;
-  idSouCat!: number;
-  idPate!: number;
-  idTaill!: number;
-  prix!: number;
-  idImg!: number;
-  idMag!: number;
-  acti!: boolean;
+export interface Produit {
+  idPrd: number;
+  libePrd: string;
+  souCat: string;
+  description: string;
+  prixLiv: number;
+  prixEmp: number;
+  prixProm: number;
+  idMenu: number;
+  idTaill: number;
+  acti: boolean;
+  idImg: number;
+  path?:string;
 }

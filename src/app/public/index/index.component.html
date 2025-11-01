@@ -15,15 +15,35 @@
 				    					<div class="img-block ab1" data-animation-in="bounceInDown" data-animation-out="animate-out fadeOutRight">
 				    						<img src="assets/public/images/pizza.png" alt="" class="img-responsive">
 				    					</div>
-				    					<h1 class="text-stl1" data-animation-in="lightSpeedIn" data-animation-out="animate-out fadeOutRight">Livraison OU Importation</h1>
-				    					<div class="number-block" data-animation-in="fadeInUp" data-animation-out="animate-out fadeOutRight">
-				    						<p class="text-stl2"><!-- Aliquam laoreet orci quis risus vulputate tempor Quisque aliquetmattis mattis tortor nibh cursus lorem --></p>
+				    					<h1 class="text-stl1" data-animation-in="lightSpeedIn" data-animation-out="animate-out fadeOutRight" style="margin-top: 10%;"></h1>
+				    					<!-- <div class="number-block" data-animation-in="fadeInUp" data-animation-out="animate-out fadeOutRight">
+				    						<p class="text-stl2"></p>
 				    						<h2 class="text-stl3">+00 33 22 456 789</h2>
 				    						<div class="text-center">
 					    						<a href="#" class="btn1 stl2">À propos de Plus</a>
 					    						<a href="#" class="btn1 stl1">Ajouter au panier</a>
 				    						</div>
 				    					</div>
+ -->
+
+<div class="number-block" data-animation-in="fadeInUp">
+  <div class="card shadow-lg border-0 rounded-4 bg-white bg-opacity-75 p-4 text-center">
+    <p class="text-stl2 mb-3">
+      Commandez en ligne et profitez de nos pizzas fraîches !
+    </p>
+
+    <!-- 🔥 Boutons principaux -->
+    <div class="d-flex justify-content-center gap-4 mt-3">
+      <button class="btn-choice livraison" (click)="Livraison()">
+        🚚 Livraison
+      </button>
+      <button class="btn-choice importation" (click)="choisirOption('importation')">
+        🍕 À emporter
+      </button>
+    </div>
+  </div>
+</div>
+
 				    				</div>
 				    			</div>
 				    			<div class="col-lg-6 col-md-6 col-sm-6">
@@ -37,39 +57,10 @@
 				    	</div>
 				    </div><!-- .slider-block -->
 				</div>
-				<div class="item">
-			    	<div class="slider-block slide1 new-block">
-			    		<div class="container-fluid">
-				    		<div class="row">
-				    			<div class="col-lg-6 col-md-6 col-sm-6">
-				    				<div class="text-block">
-				    					<div class="img-block ab1" data-animation-in="bounceInDown" data-animation-out="animate-out fadeOutRight">
-				    						<img src="assets/public/images/pizza.png" alt="" class="img-responsive">
-				    					</div>
-				    					<h1 class="text-stl1" data-animation-in="lightSpeedIn" data-animation-out="animate-out fadeOutRight">Livraison OU Importation</h1>
-				    					<div class="number-block" data-animation-in="fadeInUp" data-animation-out="animate-out fadeOutRight">
-				    						<p class="text-stl2"><!-- Aliquam laoreet orci quis risus vulputate tempor Quisque aliquetmattis mattis tortor nibh cursus lorem --></p>
-				    						<h2 class="text-stl3">+00 33 22 456 789</h2>
-				    						<div class="text-center">
-					    						<a href="#" class="btn1 stl2">À propos de Plus</a>
-					    						<a href="#" class="btn1 stl1">Ajouter au panier</a>
-				    						</div>
-				    					</div>
-				    				</div>
-				    			</div>
-				    			<div class="col-lg-6 col-md-6 col-sm-6">
-				    				<div class="img-block img2">
-				    					<div class="img-holder" data-animation-in="fadeInDown" data-animation-out="animate-out fadeOutRight">
-				    						<img src="assets/public/images/sldr.png" alt="" class="img-responsive">
-				    					</div>
-				    				</div>
-				    			</div>
-				    		</div>
-				    	</div>
-				    </div><!-- .slider-block -->
-				</div>
+
 			</div>
-		</div><!-- banner -->
+		</div>
+    <!-- banner -->
 
 
 	<!-- 	<section class="cat-sec new-block">

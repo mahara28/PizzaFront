@@ -1,0 +1,36 @@
+.btn-choice {
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 15px 40px;
+  border-radius: 50px;
+  border: none;
+  transition: 0.3s ease-in-out;
+  cursor: pointer;
+  min-width: 200px;
+  text-transform: uppercase;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+}
+
+.btn-choice.livraison {
+  background: #e53935;
+  color: #fff;
+}
+
+.btn-choice.livraison:hover {
+  background: #c62828;
+  transform: scale(1.05);
+}
+
+.btn-choice.importation {
+  background: #ffb300;
+  color: #000;
+}
+
+.btn-choice.importation:hover {
+  background: #f9a825;
+  transform: scale(1.05);
+}
+.card {
+  backdrop-filter: blur(6px); /* Effet verre dépoli */
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}

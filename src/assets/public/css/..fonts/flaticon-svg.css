@@ -1,0 +1,25 @@
+/*
+  Flaticon SVG version
+  Créé le 15/09/2025
+*/
+
+[class^="flaticon-"],
+[class*=" flaticon-"] {
+  display: inline-block;
+  width: 32px;
+  /* taille icône */
+  height: 32px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  vertical-align: middle;
+}
+
+/* Nouvelle méthode SVG */
+	.flaticon-sandwich {
+	  background-image: url("public/images/sandwich.svg");
+	}
+
+	.flaticon-desert {
+	  background-image: url("public/images/desert.svg");
+	}

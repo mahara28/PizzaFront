@@ -1,9 +1,6 @@
-export class Menu{
-  idMenu!:string;
-  libeMenu!:string;
-  prix!:number;
-  description!:string;
-  idImg!:string;
-  idMag!:string;
-  acti!:string;
+export interface Menu {
+  idMenu: number;
+  libeMenu: string;
+  description: string;
+  acti: boolean;
 }
