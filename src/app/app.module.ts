@@ -27,6 +27,8 @@ import { ListeCommande } from './public/client/commande/liste-commande/liste-com
 import { ProduitComponent } from './public/client/produit-component/produit-component';
 import { PanierComponent } from './public/client/panier-component/panier-component';
 import { LivraisonComponent } from './public/livraison/livraison.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -57,7 +59,9 @@ import { LivraisonComponent } from './public/livraison/livraison.component';
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    CommonModule
+    CommonModule,
+    MatSnackBarModule,
+    BrowserAnimationsModule
   
   ],
   providers: [

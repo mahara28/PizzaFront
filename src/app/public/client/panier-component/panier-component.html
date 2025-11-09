@@ -1,309 +1,249 @@
 <app-header></app-header>
-    <!-- Main Content -->
-    <main class="main-content">
-        <div class="container">
-            <div class="page-title">
-                <h2><i class="fas fa-shopping-cart"></i> Mon Panier</h2>
-                <span>3 articles</span>
-            </div>
-            
-            <div class="cart-container">
-                <!-- Cart Items -->
-                <div class="cart-items-section">
-                    <!-- Item 1 -->
-                    <div class="cart-item">
-                        <div class="item-image">
-                            <i class="fas fa-pizza-slice fa-2x"></i>
-                        </div>
-                        <div class="item-details">
-                            <h3 class="item-name">Pepperoni</h3>
-                            <p class="item-description">Sauce tomate, mozzarella, pepperoni</p>
-                            
-                            <div class="item-customization">
-                                <div class="customization-title">Personnalisation:</div>
-                                <div>Taille: Moyenne</div>
-                                <div>Pâte: Fine et croustillante</div>
-                                <div>Supplément fromage: Oui</div>
-                            </div>
-                            
-                            <div class="item-actions">
-                                <div class="quantity-controls">
-                                    <button class="quantity-btn"><i class="fas fa-minus"></i></button>
-                                    <span class="quantity">1</span>
-                                    <button class="quantity-btn"><i class="fas fa-plus"></i></button>
-                                </div>
-                                
-                                <div class="item-price">12,90€</div>
-                                
-                                <div class="remove-item">
-                                    <i class="fas fa-trash"></i>
-                                    <span>Supprimer</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Item 2 -->
-                    <div class="cart-item">
-                        <div class="item-image">
-                            <i class="fas fa-pizza-slice fa-2x"></i>
-                        </div>
-                        <div class="item-details">
-                            <h3 class="item-name">4 Fromages</h3>
-                            <p class="item-description">Mozzarella, gorgonzola, parmesan, chèvre</p>
-                            
-                            <div class="item-customization">
-                                <div class="customization-title">Personnalisation:</div>
-                                <div>Taille: Grande</div>
-                                <div>Pâte: Classique</div>
-                                <div>Supplément olives: Oui</div>
-                            </div>
-                            
-                            <div class="item-actions">
-                                <div class="quantity-controls">
-                                    <button class="quantity-btn"><i class="fas fa-minus"></i></button>
-                                    <span class="quantity">1</span>
-                                    <button class="quantity-btn"><i class="fas fa-plus"></i></button>
-                                </div>
-                                
-                                <div class="item-price">13,50€</div>
-                                
-                                <div class="remove-item">
-                                    <i class="fas fa-trash"></i>
-                                    <span>Supprimer</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Item 3 -->
-                    <div class="cart-item">
-                        <div class="item-image">
-                            <i class="fas fa-wine-bottle fa-2x"></i>
-                        </div>
-                        <div class="item-details">
-                            <h3 class="item-name">Coca-Cola</h3>
-                            <p class="item-description">Bouteille 1.5L</p>
-                            
-                            <div class="item-actions">
-                                <div class="quantity-controls">
-                                    <button class="quantity-btn"><i class="fas fa-minus"></i></button>
-                                    <span class="quantity">2</span>
-                                    <button class="quantity-btn"><i class="fas fa-plus"></i></button>
-                                </div>
-                                
-                                <div class="item-price">7,00€</div>
-                                
-                                <div class="remove-item">
-                                    <i class="fas fa-trash"></i>
-                                    <span>Supprimer</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+<!-- Main Content -->
+<main class="main-content">
+    <div class="container">
+        <div class="page-title">
+            <h2><i class="fas fa-shopping-cart"></i> Mon Panier</h2>
+            <span>{{getTotalItems()}} article{{getTotalItems() > 1 ? 's' : ''}}</span>
+        </div>
+        <!-- Ajouter cette div dans votre template -->
+        <div class="custom-toast" [class.show]="showToast">
+            <div class="toast-content">
+                <i class="fas fa-check-circle toast-icon" *ngIf="valide"></i>
+                <i class="fas fa-solid fa-ban toast-icon-invalid" *ngIf="!valide"></i>
+                <div class="toast-message">
+                    {{message}}
                 </div>
-                
-                <!-- Cart Summary -->
-                <div class="cart-summary-section">
-                    <h3 class="summary-title">Récapitulatif de commande</h3>
-                    
-                    <div class="summary-row">
-                        <span class="summary-label">Sous-total</span>
-                        <span class="summary-value">33,40€</span>
-                    </div>
-                    
-                    <div class="summary-row">
-                        <span class="summary-label">Frais de livraison</span>
-                        <span class="summary-value">2,50€</span>
-                    </div>
-                    
-                    <div class="summary-row">
-                        <span class="summary-label">Réduction</span>
-                        <span class="summary-value" style="color: var(--success);">-3,00€</span>
-                    </div>
-                    
-                    <div class="discount-code">
-                        <input type="text" class="discount-input" placeholder="Code promo">
-                        <button class="apply-discount">Appliquer</button>
-                    </div>
-                    
-                    <div class="total-row">
-                        <span class="total-label">Total</span>
-                        <span class="total-price">32,90€</span>
-                    </div>
-                    
-                    <button class="checkout-btn">
-                        <i class="fas fa-lock"></i>
-                        Commander maintenant
-                    </button>
-                    
-                    <div class="secure-checkout">
-                        <i class="fas fa-shield-alt"></i>
-                        Paiement sécurisé
-                    </div>
-                    
-                    <div class="suggested-items">
-                        <h4 class="suggested-title">Ajouter à ma commande</h4>
-                        <div class="suggested-grid">
-                            <div class="suggested-item">
-                                <div class="suggested-image">
-                                    <i class="fas fa-ice-cream"></i>
-                                </div>
-                                <div class="suggested-details">
-                                    <div class="suggested-name">Tiramisu</div>
-                                    <div class="suggested-price">5,00€</div>
-                                </div>
-                            </div>
-                            
-                            <div class="suggested-item">
-                                <div class="suggested-image">
-                                    <i class="fas fa-bread-slice"></i>
-                                </div>
-                                <div class="suggested-details">
-                                    <div class="suggested-name">Pain à l'ail</div>
-                                    <div class="suggested-price">4,50€</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <button class="toast-close" (click)="hideToast()">×</button>
             </div>
         </div>
-    </main>
-    
-    <!-- Footer -->
-    <app-footer></app-footer>
-
-    <script>
-        // Gestion du panier
-        document.addEventListener('DOMContentLoaded', function() {
-            const quantityBtns = document.querySelectorAll('.quantity-btn');
-            const removeItems = document.querySelectorAll('.remove-item');
-            const cartCount = document.querySelector('.cart-count');
-            const applyDiscount = document.querySelector('.apply-discount');
-            const checkoutBtn = document.querySelector('.checkout-btn');
-            
-            let count = parseInt(cartCount.textContent);
-            
-            // Gestion des quantités
-            quantityBtns.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const quantityElement = this.parentElement.querySelector('.quantity');
-                    let quantity = parseInt(quantityElement.textContent);
-                    
-                    if (this.querySelector('.fa-plus')) {
-                        quantity++;
-                        count++;
-                    } else if (this.querySelector('.fa-minus') && quantity > 1) {
-                        quantity--;
-                        count--;
-                    }
-                    
-                    quantityElement.textContent = quantity;
-                    cartCount.textContent = count;
-                    updateCartSummary();
-                });
-            });
-            
-            // Suppression d'articles
-            removeItems.forEach(item => {
-                item.addEventListener('click', function() {
-                    const cartItem = this.closest('.cart-item');
-                    const quantity = parseInt(cartItem.querySelector('.quantity').textContent);
-                    
-                    count -= quantity;
-                    cartCount.textContent = count;
-                    
-                    cartItem.style.opacity = '0';
-                    setTimeout(() => {
-                        cartItem.remove();
-                        updateCartSummary();
-                        
-                        // Vérifier si le panier est vide
-                        if (document.querySelectorAll('.cart-item').length === 0) {
-                            showEmptyCart();
-                        }
-                    }, 300);
-                });
-            });
-            
-            // Application du code promo
-            applyDiscount.addEventListener('click', function() {
-                const discountInput = document.querySelector('.discount-input');
-                const code = discountInput.value.trim().toUpperCase();
-                
-                if (code === 'DOMINOS10') {
-                    alert('Code promo appliqué ! Réduction de 10% accordée.');
-                    discountInput.value = '';
-                    updateCartSummary(true);
-                } else if (code) {
-                    alert('Code promo invalide. Veuillez réessayer.');
-                    discountInput.value = '';
-                } else {
-                    alert('Veuillez entrer un code promo.');
-                }
-            });
-            
-            // Passage à la caisse
-            checkoutBtn.addEventListener('click', function() {
-                if (count > 0) {
-                    alert('Redirection vers le processus de paiement...');
-                    // Dans une vraie application, on redirigerait vers la page de paiement
-                } else {
-                    alert('Votre panier est vide. Ajoutez des articles avant de commander.');
-                }
-            });
-            
-            // Mise à jour du récapitulatif
-            function updateCartSummary(discountApplied = false) {
-                let subtotal = 0;
-                
-                document.querySelectorAll('.cart-item').forEach(item => {
-                    const priceText = item.querySelector('.item-price').textContent;
-                    const price = parseFloat(priceText.replace('€', '').replace(',', '.'));
-                    const quantity = parseInt(item.querySelector('.quantity').textContent);
-                    
-                    subtotal += price * quantity;
-                });
-                
-                const deliveryFee = 2.50;
-                const discount = discountApplied ? subtotal * 0.1 : 3.00; // 10% de réduction ou 3€ fixe
-                const total = subtotal + deliveryFee - discount;
-                
-                // Mise à jour des valeurs dans le récapitulatif
-                document.querySelector('.summary-row:nth-child(1) .summary-value').textContent = subtotal.toFixed(2).replace('.', ',') + '€';
-                document.querySelector('.summary-row:nth-child(3) .summary-value').textContent = '-' + discount.toFixed(2).replace('.', ',') + '€';
-                document.querySelector('.total-price').textContent = total.toFixed(2).replace('.', ',') + '€';
-            }
-            
-            // Affichage du panier vide
-            function showEmptyCart() {
-                const cartItemsSection = document.querySelector('.cart-items-section');
-                cartItemsSection.innerHTML = `
-                    <div class="empty-cart">
-                        <i class="fas fa-shopping-cart"></i>
-                        <h3>Votre panier est vide</h3>
-                        <p>Ajoutez des délicieuses pizzas à votre panier pour commencer</p>
-                        <button class="continue-shopping">Continuer mes achats</button>
+        <div class="cart-container" *ngIf="cartItems.length > 0; else emptyCart">
+            <!-- Cart Items -->
+            <div class="cart-items-section">
+                <!-- Item Dynamique -->
+                <div class="cart-item" *ngFor="let item of cartItems">
+                    <div class="item-image">
+                        <i [class]="getProductIcon(item) + ' fa-2x'"></i>
                     </div>
-                `;
+                    <div class="item-details">
+                        <h3 class="item-name">{{item.libePrd}}</h3>
+                        <p class="item-description">{{item.description}}</p>
+
+                        <!-- Personnalisation -->
+                        <div class="item-customization" *ngIf="item.taille">
+                            <div class="customization-title">Personnalisation:</div>
+                            <div>Taille: {{item.taille}}</div>
+                            <!-- Ajouter d'autres personnalisations si nécessaire -->
+                        </div>
+
+                        <div class="item-actions">
+                            <div class="quantity-controls">
+                                <button class="quantity-btn" (click)="decreaseQuantity(item)">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                                <span class="quantity">{{item.quantity}}</span>
+                                <button class="quantity-btn" (click)="increaseQuantity(item)">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+
+                            <div class="item-price">{{formatPrice(item.prixLiv * item.quantity)}}</div>
+
+                            <div class="remove-item" (click)="removeItem(item)">
+                                <i class="fas fa-trash"></i>
+                                <span>Supprimer</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cart Summary -->
+            <div class="cart-summary-section">
+                <!-- Choix du mode de livraison -->
+            <div class="delivery-options">
+                <h3 class="summary-title">Mode de livraison</h3>
                 
-                // Ajouter l'événement au bouton
-                document.querySelector('.continue-shopping').addEventListener('click', function() {
-                    alert('Redirection vers la page des produits...');
-                    // Dans une vraie application, on redirigerait vers la page des produits
-                });
-            }
-            
-            // Ajout d'articles suggérés
-            document.querySelectorAll('.suggested-item').forEach(item => {
-                item.addEventListener('click', function() {
-                    const name = this.querySelector('.suggested-name').textContent;
-                    const price = this.querySelector('.suggested-price').textContent;
+                <div class="delivery-buttons">
+                    <button 
+                        class="delivery-btn" 
+                        [class.active]="deliveryOption?.type === 'pickup'"
+                        (click)="selectDeliveryType('pickup')">
+                        <i class="fas fa-store"></i>
+                        À emporter
+                        <small>Prêt dans 15-25 min</small>
+                    </button>
                     
-                    alert(`"${name}" ajouté à votre panier pour ${price}`);
-                    // Dans une vraie application, on ajouterait l'article au panier
-                });
-            });
-        });
-    </script>
+                    <button 
+                        class="delivery-btn" 
+                        [class.active]="deliveryOption?.type === 'delivery'"
+                        (click)="selectDeliveryType('delivery')">
+                        <i class="fas fa-motorcycle"></i>
+                        Livraison
+                        <small>+{{deliveryFee}}€ - 20-30 min</small>
+                    </button>
+                </div>
+
+                <!-- Formulaire d'adresse pour la livraison -->
+                <div class="delivery-address" *ngIf="deliveryOption?.type === 'delivery'">
+                    <h4>Adresse de livraison</h4>
+                    
+                    <form [formGroup]="deliveryForm" class="address-form">
+                        <div class="form-group">
+                            <input 
+                                type="text" 
+                                formControlName="street" 
+                                placeholder="Rue et numéro"
+                                class="form-control"
+                                [class.is-invalid]="deliveryForm.get('street')?.invalid && deliveryForm.get('street')?.touched">
+                            <div class="invalid-feedback" *ngIf="deliveryForm.get('street')?.invalid && deliveryForm.get('street')?.touched">
+                                Adresse requise (minimum 5 caractères)
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <input 
+                                    type="text" 
+                                    formControlName="city" 
+                                    placeholder="Ville"
+                                    class="form-control"
+                                    [class.is-invalid]="deliveryForm.get('city')?.invalid && deliveryForm.get('city')?.touched">
+                                <div class="invalid-feedback" *ngIf="deliveryForm.get('city')?.invalid && deliveryForm.get('city')?.touched">
+                                    Ville requise
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <input 
+                                    type="text" 
+                                    formControlName="postalCode" 
+                                    placeholder="Code postal"
+                                    class="form-control"
+                                    [class.is-invalid]="deliveryForm.get('postalCode')?.invalid && deliveryForm.get('postalCode')?.touched">
+                                <div class="invalid-feedback" *ngIf="deliveryForm.get('postalCode')?.invalid && deliveryForm.get('postalCode')?.touched">
+                                    Code postal invalide (5 chiffres)
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <input 
+                                type="text" 
+                                formControlName="additionalInfo" 
+                                placeholder="Complément d'adresse (étage, code porte, etc.)"
+                                class="form-control">
+                        </div>
+
+                        <button 
+                            type="button" 
+                            class="check-address-btn"
+                            (click)="checkDeliveryAddress()"
+                            [disabled]="deliveryForm.invalid || isCheckingAddress">
+                            <span *ngIf="!isCheckingAddress">Vérifier l'adresse</span>
+                            <span *ngIf="isCheckingAddress">
+                                <i class="fas fa-spinner fa-spin"></i> Vérification...
+                            </span>
+                        </button>
+                    </form>
+
+                    <!-- Résultat de la vérification -->
+                    <div class="delivery-result" *ngIf="deliveryAvailable !== undefined">
+                        <div *ngIf="deliveryAvailable" class="alert alert-success">
+                            <i class="fas fa-check-circle"></i>
+                            Livraison disponible! Distance: {{deliveryDistance}} km
+                            <br>
+                            <small>Temps estimé: {{deliveryOption?.estimatedTime}}</small>
+                        </div>
+                        <div *ngIf="!deliveryAvailable" class="alert alert-danger">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            Hors zone de livraison ({{deliveryDistance}} km)
+                            <br>
+                            <small>Notre zone de livraison est limitée à 5km</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <h3 class="summary-title">Récapitulatif de commande</h3>
+
+                <div class="summary-row">
+                    <span class="summary-label">Sous-total</span>
+                    <span class="summary-value">{{formatPrice(getSubtotal())}}</span>
+                </div>
+
+                <div class="summary-row">
+                    <span class="summary-label">Frais de livraison</span>
+                    <span class="summary-value">{{formatPrice(deliveryFee)}}</span>
+                </div>
+
+                <div class="summary-row" *ngIf="discount > 0">
+                    <span class="summary-label">Réduction</span>
+                    <span class="summary-value" style="color: var(--success);">-{{formatPrice(discount)}}</span>
+                </div>
+
+                <div class="discount-code">
+                    <input type="text" class="discount-input" placeholder="Code promo" [(ngModel)]="discountCode"
+                        (keyup.enter)="applyDiscount()">
+                    <button class="apply-discount" (click)="applyDiscount()">Appliquer</button>
+                </div>
+
+                <div class="total-row">
+                    <span class="total-label">Total</span>
+                    <span class="total-price">{{formatPrice(getTotal())}}</span>
+                </div>
+
+                <button 
+                    class="checkout-btn" 
+                    (click)="checkout()"
+                    [disabled]="deliveryOption?.type === 'delivery' && !deliveryAvailable">
+                    <i class="fas fa-lock"></i>
+                    Commander maintenant
+                </button>
+
+                <div class="delivery-info" *ngIf="deliveryOption">
+                    <i class="fas fa-info-circle"></i>
+                    {{deliveryOption.type === 'pickup' 
+                      ? 'Prêt dans 15-25 minutes' 
+                      : 'Livraison dans ' + deliveryOption.estimatedTime}}
+                </div>
+
+                <div class="secure-checkout">
+                    <i class="fas fa-shield-alt"></i>
+                    Paiement sécurisé
+                </div>
+
+                <!-- Produits suggérés -->
+                <!-- <div class="suggested-items">
+                    <h4 class="suggested-title">Ajouter à ma commande</h4>
+                    <div class="suggested-grid">
+                        <div class="suggested-item" *ngFor="let suggested of suggestedItems"
+                            (click)="addSuggestedItem(suggested)">
+                            <div class="suggested-image">
+                                <i [class]="suggested.icon"></i>
+                            </div>
+                            <div class="suggested-details">
+                                <div class="suggested-name">{{suggested.name}}</div>
+                                <div class="suggested-price">{{formatPrice(suggested.price)}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+
+        <!-- Panier vide -->
+        <ng-template #emptyCart>
+            <div class="empty-cart">
+                <i class="fas fa-shopping-cart fa-4x"></i>
+                <h3>Votre panier est vide</h3>
+                <p>Découvrez nos délicieuses pizzas et ajoutez-les à votre panier !</p>
+                <button class="continue-shopping" routerLink="/auth/produit">
+                    Continuer mes achats
+                </button>
+            </div>
+        </ng-template>
+    </div>
+</main>
+
+<!-- Footer -->
+<app-footer></app-footer>

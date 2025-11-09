@@ -612,3 +612,170 @@ footer {
         align-self: flex-start;
     }
 }
+////////////// LIVRAISON
+/* Options de livraison */
+.delivery-options {
+    margin-bottom: 25px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.delivery-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin: 15px 0;
+}
+
+.delivery-btn {
+    padding: 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.delivery-btn:hover {
+    border-color: --#0054A6;
+}
+
+.delivery-btn.active {
+    border-color: #0054A6;
+    background: rgba(0, 84, 166, 0.1);
+}
+
+.delivery-btn i {
+    font-size: 24px;
+    margin-bottom: 8px;
+    display: block;
+    color: #0054A6;
+}
+
+.delivery-btn small {
+    display: block;
+    margin-top: 5px;
+    color: #666;
+    font-size: 12px;
+}
+
+/* Formulaire d'adresse */
+.delivery-address {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #e0e0e0;
+}
+
+.address-form {
+    margin-top: 15px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: #0054A6;
+}
+
+.form-control.is-invalid {
+    border-color: var(--secondary);
+}
+
+.invalid-feedback {
+    color: var(--secondary);
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.check-address-btn {
+    background: #0054A6;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 100%;
+    font-weight: 500;
+    transition: background-color 0.3s;
+}
+
+.check-address-btn:hover:not(:disabled) {
+    background: #00428a;
+}
+
+.check-address-btn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+/* Résultat de livraison */
+.delivery-result {
+    margin-top: 15px;
+}
+
+.alert {
+    padding: 12px 15px;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.alert-success {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.alert-danger {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.alert i {
+    margin-right: 8px;
+}
+
+/* Info livraison */
+.delivery-info {
+    text-align: center;
+    margin-top: 15px;
+    padding: 10px;
+    background: #e7f3ff;
+    border-radius: 6px;
+    color: #0054A6;
+    font-size: 14px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .delivery-buttons {
+        grid-template-columns: 1fr;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .cart-container {
+        flex-direction: column;
+    }
+}

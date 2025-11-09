@@ -1,204 +1,195 @@
-<!-- <div *ngIf="jwtToken">
+<!-- 
+    <div *ngIf="jwtToken">
       <p>Token JWT Google:</p>
       <textarea cols="60" rows="6">{{ jwtToken }}</textarea>
-    </div> -->
+    </div>    
+-->
 
-    <!-- Header -->
-      <app-header></app-header>
-    
-    <!-- Main Content -->
-    <main class="main-content">
-        <div class="container">
-            <h2 class="page-title">Nos Pizzas</h2>
-            
-            <div class="products-section">
-                <!-- Filters -->
-                <aside class="filters">
-                    <div class="filter-group">
-                        <h3 class="filter-title">Catégories</h3>
-                        <div class="filter-options">
-                            <label class="filter-option">
-                                <input type="checkbox" checked> Pizzas
-                            </label>
-                            <label class="filter-option">
-                                <input type="checkbox"> Boissons
-                            </label>
-                            <label class="filter-option">
-                                <input type="checkbox"> Desserts
-                            </label>
-                            <label class="filter-option">
-                                <input type="checkbox"> Accompagnements
-                            </label>
+<!-- Header -->
+<app-header></app-header>
+
+<!-- Main Content -->
+<main class="main-content">
+    <div class="container">
+        <h2 class="page-title">Nos Pizzas</h2>
+
+        <div class="products-section">
+            <!-- Filtres élégants en haut -->
+            <div class="modern-filters">
+                <div class="filters-header">
+                    <h2 class="filters-title">
+                        <i class="fas fa-sliders-h"></i>
+                        Filtres
+                    </h2>
+                    <div class="filter-stats">
+                        {{filteredProducts.length}} produit(s) trouvé(s)
+                    </div>
+                </div>
+
+                <div class="filters-row">
+                    <!-- Filtre Catégories -->
+                    <div class="filter-dropdown">
+                        <button class="dropdown-toggle" (click)="toggleDropdown('categories')">
+                            <i class="fas fa-tags"></i>
+                            Catégories
+                            <i class="fas fa-chevron-down dropdown-arrow"
+                                [class.rotated]="activeDropdown === 'categories'"></i>
+                        </button>
+                        <div class="dropdown-menu" [class.show]="activeDropdown === 'categories'">
+                            <div class="dropdown-content">
+                                <label class="filter-option modern" *ngFor="let menu of lstMenu">
+                                    <input type="checkbox" [checked]="selectedCategories.includes(menu.idMenu)"
+                                        (change)="onCategoryChange(menu.idMenu, $event)">
+                                    <span class="checkmark"></span>
+                                    {{menu.libeMenu}}
+                                </label>
+                            </div>
                         </div>
                     </div>
-                    
-                    <div class="filter-group">
-                        <h3 class="filter-title">Prix</h3>
-                        <input type="range" min="0" max="30" value="15" class="price-range">
-                        <div class="price-values">
-                            <span>0€</span>
-                            <span>30€</span>
+
+                    <!-- Filtre Prix -->
+                    <div class="filter-dropdown">
+                        <button class="dropdown-toggle" (click)="toggleDropdown('price')">
+                            <i class="fas fa-euro-sign"></i>
+                            Prix - jusqu'à {{priceRange}}€
+                            <i class="fas fa-chevron-down dropdown-arrow"
+                                [class.rotated]="activeDropdown === 'price'"></i>
+                        </button>
+                        <div class="dropdown-menu" [class.show]="activeDropdown === 'price'">
+                            <div class="dropdown-content">
+                                <div class="price-filter">
+                                    <input type="range" min="0" max="30" [value]="priceRange" class="modern-range"
+                                        (input)="onPriceChange($event)">
+                                    <div class="price-labels">
+                                        <span>0€</span>
+                                        <span class="current-price">{{priceRange}}€</span>
+                                        <span>30€</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    
-                    <div class="filter-group">
-                        <h3 class="filter-title">Taille</h3>
-                        <div class="filter-options">
-                            <label class="filter-option">
-                                <input type="checkbox" checked> Petite
-                            </label>
-                            <label class="filter-option">
-                                <input type="checkbox" checked> Moyenne
-                            </label>
-                            <label class="filter-option">
-                                <input type="checkbox"> Grande
-                            </label>
-                            <label class="filter-option">
-                                <input type="checkbox"> Familiale
-                            </label>
+
+                    <!-- Filtre Taille -->
+                    <div class="filter-dropdown">
+                        <button class="dropdown-toggle" (click)="toggleDropdown('size')">
+                            <i class="fas fa-expand-arrows-alt"></i>
+                            Taille
+                            <i class="fas fa-chevron-down dropdown-arrow"
+                                [class.rotated]="activeDropdown === 'size'"></i>
+                        </button>
+                        <div class="dropdown-menu" [class.show]="activeDropdown === 'size'">
+                            <div class="dropdown-content">
+                                <label class="filter-option modern">
+                                    <input type="checkbox" [checked]="selectedSizes.includes('Petite')"
+                                        (change)="onSizeChange('Petite', $event)">
+                                    <span class="checkmark"></span>
+                                    Petite
+                                </label>
+                                <label class="filter-option modern">
+                                    <input type="checkbox" [checked]="selectedSizes.includes('Moyenne')"
+                                        (change)="onSizeChange('Moyenne', $event)">
+                                    <span class="checkmark"></span>
+                                    Moyenne
+                                </label>
+                                <label class="filter-option modern">
+                                    <input type="checkbox" [checked]="selectedSizes.includes('Grande')"
+                                        (change)="onSizeChange('Grande', $event)">
+                                    <span class="checkmark"></span>
+                                    Grande
+                                </label>
+                                <label class="filter-option modern">
+                                    <input type="checkbox" [checked]="selectedSizes.includes('Familiale')"
+                                        (change)="onSizeChange('Familiale', $event)">
+                                    <span class="checkmark"></span>
+                                    Familiale
+                                </label>
+                            </div>
                         </div>
                     </div>
-                    
-                    <div class="filter-group">
-                        <h3 class="filter-title">Ingrédients</h3>
-                        <div class="filter-options">
-                            <label class="filter-option">
-                                <input type="checkbox"> Végétarienne
-                            </label>
-                            <label class="filter-option">
-                                <input type="checkbox"> Sans gluten
-                            </label>
-                            <label class="filter-option">
-                                <input type="checkbox"> Épicée
-                            </label>
-                        </div>
-                    </div>
-                </aside>
-                
-                <!-- Products Grid -->
+
+                    <!-- Bouton reset -->
+                    <button class="reset-filters" (click)="resetFilters()">
+                        <i class="fas fa-redo"></i>
+                        Réinitialiser
+                    </button>
+                </div>
+
+                <!-- Tags des filtres actifs -->
+                <div class="active-filters" *ngIf="hasActiveFilters()">
+                    <span class="filter-tag" *ngFor="let category of getSelectedCategoriesNames()">
+                        {{category}}
+                        <i class="fas fa-times" (click)="removeCategoryFilter(category)"></i>
+                    </span>
+                    <span class="filter-tag" *ngIf="priceRange < 30">
+                        Prix ≤ {{priceRange}}€
+                        <i class="fas fa-times" (click)="resetPrice()"></i>
+                    </span>
+                    <span class="filter-tag" *ngFor="let size of selectedSizes">
+                        {{size}}
+                        <i class="fas fa-times" (click)="removeSizeFilter(size)"></i>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Contenu principal -->
+            <div class="products-content">
+                <!-- Grille des produits -->
                 <div class="products-grid">
-                    <!-- Product 1 -->
-                    <div class="product-card">
+                    <div class="product-card" *ngFor="let pizza of paginatedProducts">
                         <div class="product-image">
-                            [Image Pizza 1]
+                            [Image Pizza]
                         </div>
                         <div class="product-info">
-                            <h3 class="product-name">Margherita</h3>
-                            <p class="product-description">Sauce tomate, mozzarella, basilic frais</p>
-                            <div class="product-price">10,90€</div>
-                            <button class="add-to-cart">Ajouter au panier</button>
-                        </div>
-                    </div>
-                    
-                    <!-- Product 2 -->
-                    <div class="product-card">
-                        <div class="product-image">
-                            [Image Pizza 2]
-                        </div>
-                        <div class="product-info">
-                            <h3 class="product-name">Pepperoni</h3>
-                            <p class="product-description">Sauce tomate, mozzarella, pepperoni</p>
-                            <div class="product-price">12,90€</div>
-                            <button class="add-to-cart">Ajouter au panier</button>
-                        </div>
-                    </div>
-                    
-                    <!-- Product 3 -->
-                    <div class="product-card">
-                        <div class="product-image">
-                            [Image Pizza 3]
-                        </div>
-                        <div class="product-info">
-                            <h3 class="product-name">4 Fromages</h3>
-                            <p class="product-description">Mozzarella, gorgonzola, parmesan, chèvre</p>
-                            <div class="product-price">13,50€</div>
-                            <button class="add-to-cart">Ajouter au panier</button>
-                        </div>
-                    </div>
-                    
-                    <!-- Product 4 -->
-                    <div class="product-card">
-                        <div class="product-image">
-                            [Image Pizza 4]
-                        </div>
-                        <div class="product-info">
-                            <h3 class="product-name">Hawaïenne</h3>
-                            <p class="product-description">Sauce tomate, mozzarella, jambon, ananas</p>
-                            <div class="product-price">12,50€</div>
-                            <button class="add-to-cart">Ajouter au panier</button>
-                        </div>
-                    </div>
-                    
-                    <!-- Product 5 -->
-                    <div class="product-card">
-                        <div class="product-image">
-                            [Image Pizza 5]
-                        </div>
-                        <div class="product-info">
-                            <h3 class="product-name">Végétarienne</h3>
-                            <p class="product-description">Sauce tomate, mozzarella, légumes grillés</p>
-                            <div class="product-price">11,90€</div>
-                            <button class="add-to-cart">Ajouter au panier</button>
-                        </div>
-                    </div>
-                    
-                    <!-- Product 6 -->
-                    <div class="product-card">
-                        <div class="product-image">
-                            [Image Pizza 6]
-                        </div>
-                        <div class="product-info">
-                            <h3 class="product-name">Spéciale Maison</h3>
-                            <p class="product-description">Sauce tomate, mozzarella, viande hachée, champignons</p>
-                            <div class="product-price">14,90€</div>
-                            <button class="add-to-cart">Ajouter au panier</button>
+                            <h3 class="product-name">{{pizza.libePrd}}</h3>
+                            <p class="product-description">{{pizza.description}}</p>
+                            <div class="product-price">{{pizza.prixLiv}}€</div>
+                            <button class="add-to-cart" (click)="addToCart(pizza)">
+                                <i class="fas fa-cart-plus"></i>
+                                Ajouter au panier
+                            </button>
                         </div>
                     </div>
                 </div>
+
+                <!-- Pagination -->
+                <div class="pagination-bottom" *ngIf="totalPages > 1">
+                    <div class="pagination">
+                        <button class="page-btn" (click)="previousPage()" [disabled]="currentPage === 1">
+                            ‹ Précédent
+                        </button>
+                        <span class="page-info">
+                            Page {{currentPage}} sur {{totalPages}}
+                        </span>
+                        <button class="page-btn" (click)="nextPage()" [disabled]="currentPage === totalPages">
+                            Suivant ›
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Message si aucun résultat -->
+                <div *ngIf="filteredProducts.length === 0" class="no-results">
+                    <i class="fas fa-search fa-3x"></i>
+                    <h3>Aucun produit trouvé</h3>
+                    <p>Aucun produit ne correspond à vos critères de recherche.</p>
+                    <button class="reset-search" (click)="resetFilters()">
+                        Réinitialiser les filtres
+                    </button>
+                </div>
+            </div>
+
+            <!-- Toast notification -->
+            <div class="custom-toast" [class.show]="showToast">
+                <div class="toast-content">
+                    <i class="fas fa-check-circle toast-icon"></i>
+                    <div class="toast-message">
+                        <strong>{{toastProductName}}</strong> ajouté au panier
+                    </div>
+                    <button class="toast-close" (click)="hideToast()">×</button>
+                </div>
             </div>
         </div>
-    </main>
-    
-    <!-- Footer -->
-    <app-footer></app-footer>
+    </div>
+</main>
 
-    <script>
-        // Gestion du panier
-        document.addEventListener('DOMContentLoaded', function() {
-            const addToCartButtons = document.querySelectorAll('.add-to-cart');
-            const cartCount = document.querySelector('.cart-count');
-            let count = parseInt(cartCount.textContent);
-            
-            addToCartButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    count++;
-                    cartCount.textContent = count;
-                    
-                    // Animation du bouton
-                    this.textContent = 'Ajouté !';
-                    this.style.backgroundColor = '#28a745';
-                    
-                    setTimeout(() => {
-                        this.textContent = 'Ajouter au panier';
-                        this.style.backgroundColor = '';
-                    }, 1500);
-                });
-            });
-            
-            // Gestion des filtres
-            const priceRange = document.querySelector('.price-range');
-            const filterOptions = document.querySelectorAll('.filter-option input');
-            
-            priceRange.addEventListener('input', function() {
-                // Dans une vraie application, on filtrerait les produits ici
-                console.log('Prix max:', this.value);
-            });
-            
-            filterOptions.forEach(option => {
-                option.addEventListener('change', function() {
-                    // Dans une vraie application, on filtrerait les produits ici
-                    console.log('Filtre modifié:', this.parentElement.textContent.trim());
-                });
-            });
-        });
-    </script>
+<app-footer></app-footer>
