@@ -24,12 +24,49 @@ export class ConnexionComponent implements AfterViewInit {
   }
 
   ngOnInit() {
-    /* this.authService.authState.subscribe((user) => {
-     this.user = user;
-     this.loggedIn = (user != null);
-     console.log(user);
-   }); */
+    
+    this.styleGoogleButton()
+   
   }
+  private styleGoogleButton() {
+  const checkButton = setInterval(() => {
+    const googleButton = document.querySelector('#googleSignInButton .nsm7Bb-HzV7m-LgbsSe') as HTMLElement;
+    
+    if (googleButton) {
+      // Style principal
+      googleButton.style.cssText = `
+        width: 50px !important;
+        height: 50px !important;
+        border-radius: 50% !important;
+        padding: 0 !important;
+        min-width: auto !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        overflow: hidden !important;
+      `;
+      
+      // Cacher le texte
+      const textSpan = googleButton.querySelector('.nsm7Bb-HzV7m-LgbsSe-BPrWId') as HTMLElement;
+      if (textSpan) textSpan.style.display = 'none';
+      
+      // Centrer l'icône
+      const svgContainer = googleButton.querySelector('.nsm7Bb-HzV7m-LgbsSe-Bz112c') as HTMLElement;
+      if (svgContainer) {
+        svgContainer.style.cssText = `
+          margin: 11px !important;
+          display: flex !important;
+          align-items: center !important;
+          justify-content: center !important;
+          width: 26px;
+        `;
+      }
+      
+      clearInterval(checkButton);
+    }
+  }, 100);
+}
+
   ngAfterViewInit(): void {
     // Vérifie que la variable google existe
     if ((window as any).google) {
@@ -57,7 +94,7 @@ export class ConnexionComponent implements AfterViewInit {
     sessionStorage.setItem("userInfo",JSON.stringify(decodedToken))
 
     this.loggedIn = true;
-    localStorage.setItem("jwtToken", response.credential);
+    sessionStorage.setItem("jwtToken", response.credential);
 
     this.ngZone.run(() => {
       this.router.navigate(['/auth/commande']);

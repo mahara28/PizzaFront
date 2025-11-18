@@ -179,16 +179,16 @@ export class PanierComponent {
       this.deliveryOption = {
         type: 'pickup',
         available: true,
-        estimatedTime: '15-25 minutes'
+        estimatedTime: environment.pickup_estimatedTime
       };
       this.deliveryFee = 0;
     } else {
       this.deliveryOption = {
         type: 'delivery',
         available: false,
-        estimatedTime: '20-30 minutes'
+        estimatedTime: environment.delivery_estimatedTime
       };
-      this.deliveryFee = 2.50;
+      this.deliveryFee = environment.deliveryFee;
       this.deliveryForm.reset();
     }
   }
@@ -218,7 +218,7 @@ export class PanierComponent {
           icon: 'success',
           title: 'Livraison disponible!',
           text: result.message,
-          timer: 3000,
+          timer: environment.toast_duration,
           showConfirmButton: false
         });
       } else {
@@ -343,7 +343,7 @@ export class PanierComponent {
 
   private showFinalConfirmation(): void {
     const deliveryText = this.deliveryOption?.type === 'pickup' 
-      ? 'À emporter - Prêt dans 15-25 minutes'
+      ? `À emporter - Prêt dans ${environment.pickup_estimatedTime}`
       : `Livraison - ${this.deliveryOption?.estimatedTime}`;
 
     Swal.fire({
@@ -392,7 +392,7 @@ export class PanierComponent {
             <p><strong>Merci pour votre commande!</strong></p>
             <p>Numéro: <strong>#${orderNumber}</strong></p>
             <p>${this.deliveryOption?.type === 'pickup' 
-              ? 'Votre commande sera prête dans 15-25 minutes' 
+              ? `Votre commande sera prête dans ${environment.pickup_estimatedTime}`
               : `Livraison estimée: ${this.deliveryOption?.estimatedTime}`}</p>
           </div>
         `,

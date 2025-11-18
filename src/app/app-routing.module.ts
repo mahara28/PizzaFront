@@ -15,6 +15,7 @@ import { FidelitesComponent } from './public/fidelites/fidelites.component';
 import { EngagementsComponent } from './public/engagements/engagements.component';
 import { CartComponent } from './public/cart/cart.component';
 import { AdminComponent } from './admin/admin/admin.component';
+import { AuthGuard } from './public/services/auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' }, // Redirection par défaut
@@ -30,9 +31,9 @@ const routes: Routes = [
   { path: 'cart', component: CartComponent },
   { path: 'administration', component: AdminComponent },
   { path: 'admin/login', component: LoginComponent },
-  { path: 'auth/commande', component: ListeCommande },
-  { path: 'auth/produit', component: ProduitComponent },
-  { path: 'auth/panier', component: PanierComponent },
+  { path: 'auth/commande', component: ListeCommande,  canActivate: [AuthGuard] },
+  { path: 'auth/produit', component: ProduitComponent , canActivate: [AuthGuard]},
+  { path: 'auth/panier', component: PanierComponent, canActivate: [AuthGuard] },
 
 
 ];

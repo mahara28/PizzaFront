@@ -18,7 +18,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   constructor(private router: Router,private panierService: PanierService) {}
   ngOnInit(): void {
-    this.jwtToken = localStorage.getItem("jwtToken");
+    this.jwtToken = sessionStorage.getItem("jwtToken");
     this.userInfo = JSON.parse(sessionStorage.getItem("userInfo")!);
 
     // S'abonner aux changements du panier
