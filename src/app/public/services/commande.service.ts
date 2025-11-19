@@ -27,4 +27,10 @@ export class CommandeService {
     });
   }
 
+  addOrdre(objet:any){
+    return this.http.post(environment.URL_CON_AUTH + '/commande/ajouter',objet, {
+      headers: { Authorization: `Bearer ${this.jwtToken}` }
+    });
+  }
+
 }

@@ -102,12 +102,14 @@ export class ListeCommande implements OnInit {
   // Textes des statuts
   statusTexts = {
     'Livrée': 'Livrée',
+    'En attente': 'En attente',
     'En préparation': 'En préparation',
     'En route': 'En route',
     'Annulée': 'Annulée'
   };
 
   statusIcons = {
+    'En attente': 'fas fa-clock',
     'Livrée': 'fas fa-check',
     'En préparation': 'fas fa-utensils',
     'En route': 'fas fa-motorcycle',
@@ -142,7 +144,7 @@ export class ListeCommande implements OnInit {
           adresse: item.adresse,
           typeLivraison: item.typeLivraison,
           produits: [],
-          total: 0
+          total: item.prix
         });
       }
 
@@ -154,7 +156,7 @@ export class ListeCommande implements OnInit {
         price: item.prixLiv
       });
 
-      commande.total += (item.prixLiv * item.quantite);
+      //commande.total += (item.prixLiv * item.quantite);
     });
 
     this.groupedOrders = Array.from(map.values());

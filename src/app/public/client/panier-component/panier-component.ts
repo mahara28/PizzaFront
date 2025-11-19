@@ -6,6 +6,12 @@ import { environment } from 'src/environments/environment';
 import { DeliveryAddress, DeliveryOption, LivraisonService } from '../../services/livraison.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { CommandeService } from '../../services/commande.service';
+
+export interface CommandeDTO {
+  commande: any;
+  produitCommandes: any[];
+}
 
 @Component({
   selector: 'app-panier-component',
@@ -30,10 +36,11 @@ export class PanierComponent {
   deliveryDistance?: number;
 
   constructor(
-    private panierService: PanierService, 
+    private panierService: PanierService,
     private deliveryService: LivraisonService,
+    private commandeService: CommandeService,
     private fb: FormBuilder
-  ) { 
+  ) {
     this.deliveryForm = this.createDeliveryForm();
   }
 
@@ -144,7 +151,7 @@ export class PanierComponent {
 
   showToast: boolean = false;
   message: string = '';
-  valide:boolean = true;
+  valide: boolean = true;
 
   // Message de confirmation (optionnel)
   private showAddToCartMessage(message: string): void {
@@ -254,7 +261,7 @@ export class PanierComponent {
       if (deliveryType === undefined) return;
 
       this.selectDeliveryType(deliveryType ? 'delivery' : 'pickup');
-      
+
       if (deliveryType) {
         // Si livraison, demander l'adresse
         await this.showAddressForm();
@@ -278,71 +285,71 @@ export class PanierComponent {
   }
 
   private async showAddressForm(): Promise<void> {
-  // Étape 1: Demander l'adresse
-  const { value: addressStep1 } = await Swal.fire({
-    title: 'Adresse de livraison',
-    html: `
+    // Étape 1: Demander l'adresse
+    const { value: addressStep1 } = await Swal.fire({
+      title: 'Adresse de livraison',
+      html: `
       <input id="street" class="swal2-input" placeholder="Rue et numéro *" required>
       <input id="city" class="swal2-input" placeholder="Ville *" required>
     `,
-    focusConfirm: false,
-    showCancelButton: true,
-    confirmButtonText: 'Continuer',
-    cancelButtonText: 'Annuler',
-    preConfirm: () => {
-      const street = (document.getElementById('street') as HTMLInputElement).value;
-      const city = (document.getElementById('city') as HTMLInputElement).value;
+      focusConfirm: false,
+      showCancelButton: true,
+      confirmButtonText: 'Continuer',
+      cancelButtonText: 'Annuler',
+      preConfirm: () => {
+        const street = (document.getElementById('street') as HTMLInputElement).value;
+        const city = (document.getElementById('city') as HTMLInputElement).value;
 
-      if (!street || !city) {
-        Swal.showValidationMessage('Veuillez remplir tous les champs obligatoires');
-        return false;
+        if (!street || !city) {
+          Swal.showValidationMessage('Veuillez remplir tous les champs obligatoires');
+          return false;
+        }
+
+        return { street, city };
       }
+    });
 
-      return { street, city };
-    }
-  });
+    if (!addressStep1) return;
 
-  if (!addressStep1) return;
-
-  // Étape 2: Code postal et complément
-  const { value: addressStep2 } = await Swal.fire({
-    title: 'Suite de l\'adresse',
-    html: `
+    // Étape 2: Code postal et complément
+    const { value: addressStep2 } = await Swal.fire({
+      title: 'Suite de l\'adresse',
+      html: `
       <input id="postalCode" class="swal2-input" placeholder="Code postal *" required pattern="[0-9]{5}">
       <input id="additionalInfo" class="swal2-input" placeholder="Complément d'adresse">
       <small style="text-align: left; display: block; margin-top: 10px; color: #666;">
         * Champs obligatoires
       </small>
     `,
-    focusConfirm: false,
-    showCancelButton: true,
-    confirmButtonText: 'Vérifier l\'adresse',
-    cancelButtonText: 'Retour',
-    preConfirm: () => {
-      const postalCode = (document.getElementById('postalCode') as HTMLInputElement).value;
-      const additionalInfo = (document.getElementById('additionalInfo') as HTMLInputElement).value;
+      focusConfirm: false,
+      showCancelButton: true,
+      confirmButtonText: 'Vérifier l\'adresse',
+      cancelButtonText: 'Retour',
+      preConfirm: () => {
+        const postalCode = (document.getElementById('postalCode') as HTMLInputElement).value;
+        const additionalInfo = (document.getElementById('additionalInfo') as HTMLInputElement).value;
 
-      if (!/^[0-9]{5}$/.test(postalCode)) {
-        Swal.showValidationMessage('Code postal invalide (5 chiffres requis)');
-        return false;
+        if (!/^[0-9]{5}$/.test(postalCode)) {
+          Swal.showValidationMessage('Code postal invalide (5 chiffres requis)');
+          return false;
+        }
+
+        return { postalCode, additionalInfo };
       }
+    });
 
-      return { postalCode, additionalInfo };
+    if (addressStep2) {
+      const formValues = { ...addressStep1, ...addressStep2 };
+      this.deliveryForm.patchValue(formValues);
+      this.checkDeliveryAddress();
+    } else {
+      // Retour à l'étape 1
+      await this.showAddressForm();
     }
-  });
-
-  if (addressStep2) {
-    const formValues = { ...addressStep1, ...addressStep2 };
-    this.deliveryForm.patchValue(formValues);
-    this.checkDeliveryAddress();
-  } else {
-    // Retour à l'étape 1
-    await this.showAddressForm();
   }
-}
 
   private showFinalConfirmation(): void {
-    const deliveryText = this.deliveryOption?.type === 'pickup' 
+    const deliveryText = this.deliveryOption?.type === 'pickup'
       ? `À emporter - Prêt dans ${environment.pickup_estimatedTime}`
       : `Livraison - ${this.deliveryOption?.estimatedTime}`;
 
@@ -371,6 +378,14 @@ export class PanierComponent {
   }
 
   private processOrder(): void {
+    // Préparer les données de la commande
+    const commandeData = this.prepareCommandeData();
+
+    if (!commandeData) {
+      Swal.fire('Erreur', 'Impossible de préparer la commande', 'error');
+      return;
+    }
+
     Swal.fire({
       title: 'Traitement en cours...',
       text: 'Votre commande est en cours de préparation',
@@ -380,29 +395,85 @@ export class PanierComponent {
       }
     });
 
-    // Simuler le traitement
-    setTimeout(() => {
-      const orderNumber = Math.random().toString(36).substr(2, 9).toUpperCase();
-      
-      Swal.fire({
-        icon: 'success',
-        title: 'Commande confirmée!',
-        html: `
+    // Envoyer la commande au backend
+    this.commandeService.addOrdre(commandeData).subscribe({
+      next: (response: any) => {
+        console.log('Commande sauvegardée:', response);
+
+        Swal.fire({
+          icon: 'success',
+          title: 'Commande confirmée!',
+          html: `
           <div style="text-align: center;">
             <p><strong>Merci pour votre commande!</strong></p>
-            <p>Numéro: <strong>#${orderNumber}</strong></p>
-            <p>${this.deliveryOption?.type === 'pickup' 
-              ? `Votre commande sera prête dans ${environment.pickup_estimatedTime}`
+            <p>Numéro: <strong>#${response.numCom || response.id}</strong></p>
+            <p>${this.deliveryOption?.type === 'pickup'
+              ? 'Votre commande sera prête dans 15-25 minutes'
               : `Livraison estimée: ${this.deliveryOption?.estimatedTime}`}</p>
           </div>
         `,
-        confirmButtonText: 'Parfait!'
-      }).then(() => {
-        this.panierService.clearCart();
-        this.deliveryOption = null;
-        this.deliveryForm.reset();
-      });
-    }, 2000);
+          confirmButtonText: 'Parfait!'
+        }).then(() => {
+          this.panierService.clearCart();
+          this.deliveryOption = null;
+          this.deliveryForm.reset();
+        });
+      },
+      error: (error) => {
+        console.error('Erreur lors de la sauvegarde:', error);
+
+        Swal.fire({
+          icon: 'error',
+          title: 'Erreur',
+          text: 'Une erreur est survenue lors de la commande. Veuillez réessayer.',
+          confirmButtonText: 'OK'
+        });
+      }
+    });
+  }
+
+  // Préparer les données de la commande
+  private prepareCommandeData(): CommandeDTO | null {
+    if (this.cartItems.length === 0) {
+      return null;
+    }
+    const currentUser = JSON.parse(sessionStorage.getItem("userInfo") || "")
+    // Récupérer l'utilisateur connecté
+    if (!currentUser) {
+      console.error('Utilisateur non connecté');
+      return null;
+    }
+    
+    // Préparer la commande principale
+    const commande: any = {
+      prix: this.getTotal(),
+      client: currentUser.sub, // ou currentUser.email selon votre besoin
+      etat: 'En Attente', // ou 'preparing'
+      typeLivraison: this.deliveryOption?.type === 'delivery' ? 'livraison' : 'emporter',
+      codePromo: this.discount > 0 ? this.discountCode : undefined
+    };
+
+    // Ajouter l'adresse si c'est une livraison
+    if (this.deliveryOption?.type === 'delivery' && this.deliveryForm.valid) {
+      const formValue = this.deliveryForm.value;
+      commande.adresse = `${formValue.street}, ${formValue.postalCode} ${formValue.city}`;
+      if (formValue.additionalInfo) {
+        commande.adresse += ` - ${formValue.additionalInfo}`;
+      }
+    }
+
+    // Préparer les produits de la commande
+    const produitCommandes: any[] = this.cartItems.map(item => ({
+      idProduit: item.idPrd, // Adaptez selon votre structure
+      quantite: item.quantity,
+      //prix: item.prixLiv, // Sauvegarder le prix au moment de la commande
+      //nomProduit: item.libePrd // Optionnel
+    }));
+
+    return {
+      commande,
+      produitCommandes
+    };
   }
 
   // Méthodes utilitaires
