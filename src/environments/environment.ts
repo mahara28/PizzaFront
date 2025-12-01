@@ -4,7 +4,7 @@ export const environment = {
     URL_CON : 'http://localhost:8081/api',
     URL_CON_AUTH : 'http://localhost:8081/public',
     CLIENT_ID_GOOGLE: '895808675441-q8s1822o7cr7iopna7gohta6h9ge98ss.apps.googleusercontent.com',
-
+    CLIENT_ID_FACEBOOK: '3c0c6ede663482e9e1865dc194c18887',
     //PARAM APPLICATION 
     deliveryFee: 2.50,
     toast_duration: 3000,
