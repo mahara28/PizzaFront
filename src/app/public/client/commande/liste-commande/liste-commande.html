@@ -1,272 +1,166 @@
-    <!-- Header -->
-    <app-header></app-header>
-    
-    <!-- Main Content -->
-    <main class="main-content">
-        <div class="container">
-            <div class="page-title">
-                <h2><i class="fas fa-history"></i> Mes Commandes</h2>
-                <span>5 commandes au total</span>
-            </div>
+<!-- Header -->
+<app-header></app-header>
+
+<!-- Main Content -->
+<main class="main-content" *ngIf="jwtToken">
+    <div class="container">
+        <div class="page-title">
+            <h2><i class="fas fa-history"></i> Mes Commandes</h2>
+            <span>{{filteredOrders.length}} commande{{filteredOrders.length !== 1 ? 's' : ''}} au total</span>
+        </div>
+
+        <!-- Filtres -->
+        <div class="filters">
+            <button class="filter-btn" [class.active]="currentFilter === 'all'" (click)="setFilter('all')">
+                <i class="fas fa-list"></i> Toutes
+            </button>
+            <button class="filter-btn" [class.active]="currentFilter === 'En attente'"
+                (click)="setFilter('En attente')">
+                <i class="fas fa-clock"></i> En attente
+            </button>
+            <button class="filter-btn" [class.active]="currentFilter === 'En préparation'" (click)="setFilter('En préparation')">
+                <i class="fas fa-utensils"></i> En préparation
+            </button>
+            <button class="filter-btn" [class.active]="currentFilter === 'Livrée'" (click)="setFilter('Livrée')">
+                <i class="fas fa-check-circle"></i> Livrées
+            </button>
+            <button class="filter-btn" [class.active]="currentFilter === 'En route'"
+                (click)="setFilter('En route')">
+                <i class="fas fa-motorcycle"></i> En route
+            </button>
+            <button class="filter-btn" [class.active]="currentFilter === 'Annulée'" (click)="setFilter('Annulée')">
+                <i class="fas fa-times-circle"></i> Annulées
+            </button>
             
-            <div class="filters">
-                <button class="filter-btn active"><i class="fas fa-list"></i> Toutes</button>
-                <button class="filter-btn"><i class="fas fa-clock"></i> En cours</button>
-                <button class="filter-btn"><i class="fas fa-check-circle"></i> Livrées</button>
-                <button class="filter-btn"><i class="fas fa-times-circle"></i> Annulées</button>
+        </div>
+
+        <!-- Recherche -->
+        <div class="search-box">
+            <input type="text" placeholder="Rechercher une commande..." [value]="searchTerm" (input)="onSearch($event)">
+            <button class="search-btn"><i class="fas fa-search"></i></button>
+        </div>
+
+        <!-- Section des commandes -->
+        <div class="orders-section">
+    <!-- Commandes paginées -->
+    <div class="order-card" *ngFor="let order of paginatedOrders">
+
+        <!-- En-tête commande -->
+        <div class="order-header">
+            <div>
+                <div class="order-id">Commande #{{order.numCom}}</div>
+                <div class="order-date">
+                    <i class="far fa-calendar"></i>
+                    Passée le {{ formatDate(order.dateCreation) }}
+                </div>
             </div>
-            
-            <div class="search-box">
-                <input type="text" placeholder="Rechercher une commande...">
-                <button class="search-btn"><i class="fas fa-search"></i></button>
-            </div>
-            
-            <div class="orders-section">
-                <!-- Order 1 -->
-                <div class="order-card">
-                    <div class="order-header">
-                        <div>
-                            <div class="order-id">Commande #DOM-2023-001</div>
-                            <div class="order-date"><i class="far fa-calendar"></i> Passée le 15 octobre 2023 à 18:30</div>
-                        </div>
-                        <div class="order-status status-delivered"><i class="fas fa-check"></i> Livrée</div>
-                    </div>
-                    
-                    <div class="order-details">
-                        <div class="order-items">
-                            <div class="order-item">
-                                <span class="item-name"><i class="fas fa-pizza-slice"></i> Pepperoni</span>
-                                <span class="item-quantity">x1</span>
-                                <span class="item-price">12,90€</span>
-                            </div>
-                            <div class="order-item">
-                                <span class="item-name"><i class="fas fa-pizza-slice"></i> 4 Fromages</span>
-                                <span class="item-quantity">x1</span>
-                                <span class="item-price">13,50€</span>
-                            </div>
-                            <div class="order-item">
-                                <span class="item-name"><i class="fas fa-wine-bottle"></i> Coca-Cola 1.5L</span>
-                                <span class="item-quantity">x1</span>
-                                <span class="item-price">3,50€</span>
-                            </div>
-                        </div>
-                        
-                        <div class="order-info">
-                            <div><i class="fas fa-truck"></i> <strong>Livraison:</strong> 19 rue de la Paix, Paris</div>
-                            <div><i class="far fa-credit-card"></i> <strong>Méthode de paiement:</strong> Carte bancaire</div>
-                            <div><i class="far fa-clock"></i> <strong>Heure de livraison:</strong> 19:15</div>
-                        </div>
-                        
-                        <div class="order-total">29,90€</div>
-                    </div>
-                    
-                    <div class="order-actions">
-                        <button class="action-btn"><i class="fas fa-redo"></i> Commander à nouveau</button>
-                        <button class="action-btn secondary"><i class="fas fa-file-invoice"></i> Voir la facture</button>
-                        <button class="action-btn secondary"><i class="fas fa-star"></i> Noter la commande</button>
-                    </div>
-                </div>
-                
-                <!-- Order 2 -->
-                <div class="order-card">
-                    <div class="order-header">
-                        <div>
-                            <div class="order-id">Commande #DOM-2023-002</div>
-                            <div class="order-date"><i class="far fa-calendar"></i> Passée le 12 octobre 2023 à 20:15</div>
-                        </div>
-                        <div class="order-status status-on-the-way"><i class="fas fa-motorcycle"></i> En route</div>
-                    </div>
-                    
-                    <div class="order-details">
-                        <div class="order-items">
-                            <div class="order-item">
-                                <span class="item-name"><i class="fas fa-pizza-slice"></i> Spéciale Maison</span>
-                                <span class="item-quantity">x1</span>
-                                <span class="item-price">14,90€</span>
-                            </div>
-                            <div class="order-item">
-                                <span class="item-name"><i class="fas fa-ice-cream"></i> Tiramisu</span>
-                                <span class="item-quantity">x2</span>
-                                <span class="item-price">5,00€</span>
-                            </div>
-                        </div>
-                        
-                        <div class="order-info">
-                            <div><i class="fas fa-truck"></i> <strong>Livraison:</strong> 45 avenue des Champs-Élysées, Paris</div>
-                            <div><i class="fab fa-paypal"></i> <strong>Méthode de paiement:</strong> PayPal</div>
-                            <div><i class="far fa-clock"></i> <strong>Estimation:</strong> 20-30 minutes</div>
-                        </div>
-                        
-                        <div class="order-total">24,90€</div>
-                    </div>
-                    
-                    <div class="order-actions">
-                        <button class="action-btn"><i class="fas fa-map-marker-alt"></i> Suivre ma commande</button>
-                        <button class="action-btn secondary"><i class="fas fa-headset"></i> Contacter le support</button>
-                    </div>
-                </div>
-                
-                <!-- Order 3 -->
-                <div class="order-card">
-                    <div class="order-header">
-                        <div>
-                            <div class="order-id">Commande #DOM-2023-003</div>
-                            <div class="order-date"><i class="far fa-calendar"></i> Passée le 8 octobre 2023 à 19:45</div>
-                        </div>
-                        <div class="order-status status-preparing"><i class="fas fa-utensils"></i> En préparation</div>
-                    </div>
-                    
-                    <div class="order-details">
-                        <div class="order-items">
-                            <div class="order-item">
-                                <span class="item-name"><i class="fas fa-pizza-slice"></i> Margherita</span>
-                                <span class="item-quantity">x2</span>
-                                <span class="item-price">10,90€</span>
-                            </div>
-                            <div class="order-item">
-                                <span class="item-name"><i class="fas fa-drumstick-bite"></i> Buffalo Wings</span>
-                                <span class="item-quantity">x1</span>
-                                <span class="item-price">8,50€</span>
-                            </div>
-                        </div>
-                        
-                        <div class="order-info">
-                            <div><i class="fas fa-store"></i> <strong>Retrait en magasin:</strong> Domino's Paris Centre</div>
-                            <div><i class="far fa-credit-card"></i> <strong>Méthode de paiement:</strong> Carte bancaire</div>
-                            <div><i class="far fa-clock"></i> <strong>Prêt dans:</strong> ~15 minutes</div>
-                        </div>
-                        
-                        <div class="order-total">30,30€</div>
-                    </div>
-                    
-                    <div class="order-actions">
-                        <button class="action-btn"><i class="fas fa-clock"></i> Voir le statut</button>
-                        <button class="action-btn secondary"><i class="fas fa-times"></i> Annuler la commande</button>
-                    </div>
-                </div>
-                
-                <!-- Order 4 -->
-                <div class="order-card">
-                    <div class="order-header">
-                        <div>
-                            <div class="order-id"> Commande #DOM-2023-004</div>
-                            <div class="order-date"><i class="far fa-calendar"></i> Passée le 5 octobre 2023 à 21:00</div>
-                        </div>
-                        <div class="order-status status-cancelled"><i class="fas fa-ban"></i> Annulée</div>
-                    </div>
-                    
-                    <div class="order-details">
-                        <div class="order-items">
-                            <div class="order-item">
-                                <span class="item-name"><i class="fas fa-pizza-slice"></i> Hawaïenne</span>
-                                <span class="item-quantity">x1</span>
-                                <span class="item-price">12,50€</span>
-                            </div>
-                            <div class="order-item">
-                                <span class="item-name"><i class="fas fa-wine-bottle"></i> Coca-Cola 1.5L</span>
-                                <span class="item-quantity">x1</span>
-                                <span class="item-price">3,50€</span>
-                            </div>
-                        </div>
-                        
-                        <div class="order-info">
-                            <div><i class="fas fa-truck"></i> <strong>Livraison:</strong> 12 rue du Commerce, Paris</div>
-                            <div><i class="far fa-credit-card"></i> <strong>Méthode de paiement:</strong> Carte bancaire</div>
-                            <div><i class="fas fa-exclamation-circle"></i> <strong>Raison:</strong> Annulée par le client</div>
-                        </div>
-                        
-                        <div class="order-total">16,00€</div>
-                    </div>
-                    
-                    <div class="order-actions">
-                        <button class="action-btn"><i class="fas fa-redo"></i> Commander à nouveau</button>
-                    </div>
-                </div>
-                
-                <!-- Order 5 -->
-                <div class="order-card">
-                    <div class="order-header">
-                        <div>
-                            <div class="order-id">Commande #CRM-2023-005</div>
-                            <div class="order-date"><i class="far fa-calendar"></i> Passée le 1 octobre 2023 à 17:20</div>
-                        </div>
-                        <div class="order-status status-delivered"><i class="fas fa-check"></i> Livrée</div>
-                    </div>
-                    
-                    <div class="order-details">
-                        <div class="order-items">
-                            <div class="order-item">
-                                <span class="item-name"><i class="fas fa-pizza-slice"></i> Végétarienne</span>
-                                <span class="item-quantity">x1</span>
-                                <span class="item-price">11,90€</span>
-                            </div>
-                            <div class="order-item">
-                                <span class="item-name"><i class="fas fa-leaf"></i> Salade César</span>
-                                <span class="item-quantity">x1</span>
-                                <span class="item-price">6,50€</span>
-                            </div>
-                        </div>
-                        
-                        <div class="order-info">
-                            <div><i class="fas fa-truck"></i> <strong>Livraison:</strong> 28 boulevard Saint-Germain, Paris</div>
-                            <div><i class="fas fa-money-bill-wave"></i> <strong>Méthode de paiement:</strong> Espèces</div>
-                            <div><i class="far fa-clock"></i> <strong>Heure de livraison:</strong> 18:05</div>
-                        </div>
-                        
-                        <div class="order-total">18,40€</div>
-                    </div>
-                    
-                    <div class="order-actions">
-                        <button class="action-btn"><i class="fas fa-redo"></i> Commander à nouveau</button>
-                        <button class="action-btn secondary"><i class="fas fa-file-invoice"></i> Voir la facture</button>
-                    </div>
-                </div>
+
+            <div class="order-status" [class]="'status-' + order.etat">
+                <i [class]="getStatusIcon(order.etat)"></i> 
+                {{ getStatusText(order.etat) }}
             </div>
         </div>
-    </main>
-    
-    <!-- Footer -->
-    <app-footer></app-footer>
 
-    <script>
-        // Gestion des filtres
-        document.addEventListener('DOMContentLoaded', function() {
-            const filterButtons = document.querySelectorAll('.filter-btn');
-            
-            filterButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    // Retirer la classe active de tous les boutons
-                    filterButtons.forEach(btn => btn.classList.remove('active'));
-                    
-                    // Ajouter la classe active au bouton cliqué
-                    this.classList.add('active');
-                    
-                    // Dans une vraie application, on filtrerait les commandes ici
-                    console.log('Filtre activé:', this.textContent);
-                });
-            });
-            
-            // Gestion de la recherche
-            const searchInput = document.querySelector('.search-box input');
-            const searchButton = document.querySelector('.search-btn');
-            
-            searchButton.addEventListener('click', function() {
-                performSearch();
-            });
-            
-            searchInput.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    performSearch();
-                }
-            });
-            
-            function performSearch() {
-                const searchTerm = searchInput.value.trim();
-                if (searchTerm) {
-                    console.log('Recherche:', searchTerm);
-                    // Dans une vraie application, on effectuerait la recherche ici
-                    alert(`Recherche de: "${searchTerm}"`);
-                }
-            }
-        });
-    </script>
+        <!-- Produits -->
+        <div class="order-details">
+            <div class="order-items">
+                <div class="order-item" *ngFor="let item of order.produits">
+                    <span class="item-name">{{ item.name }}</span>
+                    <span class="item-quantity">x{{ item.quantity }}</span>
+                    <span class="item-price">{{ formatPrice(item.price) }}</span>
+                </div>
+            </div>
+
+            <!-- Infos de livraison -->
+            <div class="order-info">
+                <div>
+                    <i [class]="order.typeLivraison === 'Livraison' ? 'fas fa-truck' : 'fas fa-store'"></i>
+                    <strong>{{ order.typeLivraison }} :</strong> 
+                    {{ order.adresse }}
+                </div>
+            </div>
+
+            <div class="order-total">
+                {{ formatPrice(order.total) }}
+            </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="order-actions">
+            <!-- Action commune -->
+            <button class="action-btn" (click)="reorder(order)">
+                <i class="fas fa-redo"></i> Commander à nouveau
+            </button>
+
+            <!-- Actions selon statut -->
+            <ng-container [ngSwitch]="order.etat">
+
+                <ng-container *ngSwitchCase="'Livrée'">
+                    <button class="action-btn secondary" (click)="viewInvoice(order)">
+                        <i class="fas fa-file-invoice"></i> Voir la facture
+                    </button>
+                    <!-- <button class="action-btn secondary" (click)="rateOrder(order)">
+                        <i class="fas fa-star"></i> Noter la commande
+                    </button> -->
+                </ng-container>
+
+                <ng-container *ngSwitchCase="'En route'">
+                    <button class="action-btn" (click)="trackOrder(order)">
+                        <i class="fas fa-map-marker-alt"></i> Suivre ma commande
+                    </button>
+                </ng-container>
+
+                <ng-container *ngSwitchCase="'En préparation'">
+                    <button class="action-btn" (click)="trackOrder(order)">
+                        <i class="fas fa-clock"></i> Voir le statut
+                    </button>
+                    <button class="action-btn secondary" (click)="cancelOrder(order)">
+                        <i class="fas fa-times"></i> Annuler la commande
+                    </button>
+                </ng-container>
+            </ng-container>
+
+        </div>
+    </div>
+
+    <!-- Si aucune commande -->
+    <div *ngIf="filteredOrders.length === 0" class="no-orders">
+        <i class="fas fa-box-open fa-3x"></i>
+        <h3>Aucune commande trouvée</h3>
+        <p>Aucune commande ne correspond à vos critères.</p>
+        <button class="reset-filters" 
+                (click)="setFilter('all'); searchTerm=''; applyFilters()">
+            Réinitialiser
+        </button>
+    </div>
+</div>
+
+
+        <!-- Pagination -->
+        <div class="pagination-container" *ngIf="totalPages > 1">
+             <!-- <div class="pagination-info">
+                Affichage de {{(currentPage - 1) * itemsPerPage + 1}} à
+               {{Math.min(currentPage * itemsPerPage, filteredOrders.length)}} 
+                sur {{filteredOrders.length}} commandes
+            </div> -->
+
+            <div class="pagination">
+                <button class="page-btn" (click)="previousPage()" [disabled]="currentPage === 1">
+                    ‹ Précédent
+                </button>
+
+                <button *ngFor="let page of pages" class="page-btn" [class.active]="page === currentPage"
+                    (click)="goToPage(page)">
+                    {{page}}
+                </button>
+
+                <button class="page-btn" (click)="nextPage()" [disabled]="currentPage === totalPages">
+                    Suivant ›
+                </button>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- Footer -->
+<app-footer></app-footer>

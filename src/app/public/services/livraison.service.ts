@@ -56,7 +56,7 @@ export class LivraisonService {
           distance: Math.round(distance * 10) / 10, // Arrondir à 1 décimale
           message: available
             ? `Livraison disponible (${distance} km)`
-            : `Livraison non disponible (${distance} km - limite: ${this.MAX_DELIVERY_DISTANCE} km)`
+            : `Livraison non disponible (limite: ${this.MAX_DELIVERY_DISTANCE} km)`
         };
       }),
       catchError(error => {
