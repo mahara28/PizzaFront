@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Menu } from '../models/menu/menu.js';
+import { Produit } from '../models/produits/produit.js';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +26,14 @@ export class MenuService {
     return this.http.get<Menu[]>(`${this.apiUrl}/MenuActives`);
   }
 
+ getMenusActifs(): Observable<Menu[]> {
+    return this.http.get<Menu[]>(`${this.apiUrl}/menus-actifs`);
+  }
 
+  // ✅ Récupérer les produits d’un menu donné
+  getProduitsByMenu(idMenu: number): Observable<Produit[]> {
+    return this.http.get<Produit[]>(`${this.apiUrl}/menu/${idMenu}/produits`);
+  }
 
 
   // Modifier un menu

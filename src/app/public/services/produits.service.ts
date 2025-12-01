@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams, } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.prod';
 import { Produit } from '../models/produits/produit';
 
@@ -59,5 +59,11 @@ private apiUrl = 'http://localhost:8081/public';
   searchByCategorie(souCat: string): Observable<Produit[]> {
     return this.searchProduits({ souCat: souCat, acti: true });
   }
+getProduitsByMenu(idMenu: number): Observable<Produit[]> {
+  return this.http.get<Produit[]>(`${this.apiUrl}/produit/menu/${idMenu}`);
+}
 
+getImageName(idImg: number) : Observable<string>{
+  return this.http.get<{imageName: string}>(`${this.apiUrl}/${idImg}/imageName`).pipe(map(response => response.imageName));
+}
 }
