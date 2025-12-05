@@ -67,8 +67,8 @@
           "options" : {
             "browserTarget": "app:build",
             "ssl": true,
-            "sslKey": "D:\\SI_ENFANCE\\openssl\\privkey.pem",
-            "sslCert": "D:\\SI_ENFANCE\\openssl\\cacert.crt"
+            "sslKey": "ssl/privkey.pem",
+            "sslCert": "ssl/cacert.crt"
              },
           "configurations": {
             "production": {
@@ -76,7 +76,7 @@
             },
             "development": {
               "browserTarget": "PizzaFrontEnd:build:development"
-              
+
             }
           },
           "defaultConfiguration": "development"
