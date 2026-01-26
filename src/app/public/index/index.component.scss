@@ -34,3 +34,76 @@
   backdrop-filter: blur(6px); /* Effet verre dépoli */
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
+@media (max-width: 576px) {
+  .d-flex.justify-content-center {
+    flex-direction: column;
+    align-items: center;
+  }
+  .btn-choice + .btn-choice {
+    margin-left: 0;
+    margin-top: 10px;
+  }
+}
+.btn-choice {
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.btn-choice + .btn-choice {
+  margin-left: 20px; /* 🔥 espace entre les 2 boutons */
+}
+.number-block {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 15px;
+}
+
+/* ✅ Boutons stylés */
+.btn-choice {
+  padding: 12px 24px;
+  border-radius: 8px;
+  border: none;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #fff;
+  transition: all 0.3s ease;
+  min-width: 140px;
+}
+
+/* ✅ Style distinct pour chaque bouton */
+.btn-choice.livraison {
+  background-color: #28a745;
+}
+.btn-choice.livraison:hover {
+  background-color: #218838;
+}
+
+.btn-choice.importation {
+  background-color: #ff4b2b;
+}
+.btn-choice.importation:hover {
+  background-color: #e03e22;
+}
+
+/* ✅ Responsive pour petits écrans */
+@media (max-width: 576px) {
+  .number-block {
+    padding: 20px 10px;
+  }
+
+  .card {
+   // padding: 1.5rem !important;
+  }
+
+  .d-flex.flex-wrap {
+    flex-direction: column !important;
+    gap: 10px !important;
+  }
+
+  .btn-choice {
+    width: 100%;
+    font-size: 0.95rem;
+  }
+}

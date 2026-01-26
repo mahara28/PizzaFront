@@ -17,19 +17,22 @@
   <div class="fixed-bg parallax" style="background-image: url(images/ptrn1.jpg);"></div>
   <div class="overlay"></div>
   <div class="col1">
-    <div class="filters">
+     <div class="filters">
+
       <ul class="button-group tab-flr-btn">
-        <li *ngFor="let menu of menus" class="btn-flr is-checked tab-flr-btn-btn-flr-active">
+        <li *ngFor="let menu of menus"
+            class="btn-flr"
+            [class.tab-flr-btn-btn-flr-active]="selectedMenuId === menu.idMenu"
+            (click)="selectMenu(menu)">
           <div class="cat-block">
             <div class="block-stl1 bg1">
+
               <span class="{{ menu.description }}"></span>
               <h4>{{ menu.libeMenu }}</h4>
-
             </div>
           </div>
         </li>
       </ul>
-
     </div>
   </div>
   <div class="col2">
@@ -45,55 +48,26 @@
   </div>
 
   <!-- Liste des produits -->
-  <div *ngFor="let produit of produits"
-       class="items-for-flr "
-       [attr.data-newest]="produit.idPrd ? produit.idPrd % 4 + 1 : 2"
-       [attr.data-popularity]="produit.idPrd ? produit.idPrd % 5 + 1 : 3"
-       [attr.data-price]="formatPrice(produit.prixEmp)">
+    <div *ngFor="let produit of produits" class="items-for-flr">
+        <div class="block-stl2">
+           <div class="img-holder">
+          <img [src]="produit.idImg
+                      ? 'assets/public/images/' + produit.imageName
+                      : 'assets/public/images/default.png'"
+               [alt]="produit.libePrd"
+               class="img-responsive">
+        </div>
 
-    <!-- Version normale -->
-    <div class="block-stl2">
-      <div class="img-holder">
-<!--         <img [src]="getImageUrl(produit)" [alt]="produit.libePrd || 'Produit'" class="img-responsive">
- -->      </div>
-      <div class="text-block">
-        
-        <h3>{{ produit.libePrd || 'Nom du produit' }}</h3>
-        <p class="sz">Size : Regular</p>
-        <p class="ab-it">{{ produit.description || 'Lorem ipsum dolor sit amet..' }}</p>
-        <p class="price">
-          <span>${{ formatPrice(produit.prixEmp) }}</span>
-          <del>${{ formatPrice(produit.prixProm) }} 40% off</del>
-        </p>
-      </div>
-      <div class="btn-sec">
-        <a href="#" class="btn4">About More</a>
-        <a href="#" class="btn4">Add to Cart</a>
-      </div>
-     <!--  <span class="nonveg veg-nonveg"></span> -->
-    </div>
-
-    <!-- Version alternative (md2) -->
-    <div class="block-stl2_dsn2 md2">
-      <div class="img-holder">
-<!--         <img [src]="getImageUrl(produit)" [alt]="produit.libePrd || 'Produit'" class="img-responsive">
- -->      </div>
-      <div class="text-block">
-        <h3>{{ produit.libePrd || 'Nom du produit' }}</h3>
-        <p class="sz">Size : Regular</p>
-        <p class="ab-it">{{ produit.description || 'Lorem ipsum dolor sit amet..' }}</p>
-        <p class="price">
-          <!-- <span>${{ getPromotionalPrice(produit.prixEmp) }}</span> -->
-          <del>${{ formatPrice(produit.prixEmp) }} 40% off</del>
-        </p>
-        <div class="btn-sec">
-          <a href="#" class="btn4">About More</a>
-          <a href="#" class="btn4">Add to Cart</a>
+          <div class="text-block">
+            <h3>{{ produit.libePrd }}</h3>
+            <p>{{ produit.description }}</p>
+            <p class="price">
+              <span>${{ formatPrice(produit.prixEmp) }}</span>
+              <del *ngIf="produit.prixProm">${{ formatPrice(produit.prixProm) }}</del>
+            </p>
+          </div>
         </div>
       </div>
-      <span class="nonveg veg-nonveg"></span>
-    </div>
-  </div>
 
   <!-- Message si aucun produit -->
   <div *ngIf="!loading && produits.length === 0" class="no-products">

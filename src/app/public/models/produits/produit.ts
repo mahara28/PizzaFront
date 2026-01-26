@@ -10,5 +10,5 @@ export interface Produit {
   idTaill: number;
   acti: boolean;
   idImg: number;
-  path?:string;
+  imageName?:string;
 }

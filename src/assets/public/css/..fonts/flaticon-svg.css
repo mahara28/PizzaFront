@@ -15,11 +15,3 @@
   vertical-align: middle;
 }
 
-/* Nouvelle méthode SVG */
-	.flaticon-sandwich {
-	  background-image: url("public/images/sandwich.svg");
-	}
-
-	.flaticon-desert {
-	  background-image: url("public/images/desert.svg");
-	}
