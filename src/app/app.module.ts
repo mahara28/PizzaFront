@@ -29,6 +29,7 @@ import { PanierComponent } from './public/client/panier-component/panier-compone
 import { LivraisonComponent } from './public/livraison/livraison.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { LoginComponent } from './admin/login/login.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
     ListeCommande,
     ProduitComponent,
     PanierComponent,
-    LivraisonComponent
+    LivraisonComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

@@ -29,7 +29,7 @@ const routes: Routes = [
   { path: 'engagements', component: EngagementsComponent },
   { path: 'avis', component: AvisClientsComponent },
   { path: 'cart', component: CartComponent },
-  { path: 'administration', component: AdminComponent },
+  { path: 'app/dashboard', component: AdminComponent },
   { path: 'admin/login', component: LoginComponent },
   { path: 'auth/commande', component: ListeCommande,  canActivate: [AuthGuard] },
   { path: 'auth/produit', component: ProduitComponent , canActivate: [AuthGuard]},
